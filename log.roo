@@ -1,0 +1,7 @@
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-09-30 12:35:11
+project --topLevelPackage ee.ut --projectName RentIT --java 7 --packaging JAR
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-09-30 12:35:22
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-09-30 12:37:03
+jpa setup --database POSTGRES --provider HIBERNATE --databaseName rentIT --hostName postgres --userName postgres --password kalamaja
+web mvc setup
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-09-30 13:26:19
