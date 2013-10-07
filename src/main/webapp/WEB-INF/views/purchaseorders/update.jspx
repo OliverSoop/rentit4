@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_ee_ut_model_PurchaseOrder" modelAttribute="purchaseOrder" path="/purchaseorders" versionField="Version" z="YOKyjRgcgVkASeprIW32xIXsPOo=">
+        <field:input field="ExternalID" id="c_ee_ut_model_PurchaseOrder_ExternalID" z="D2dkhoVqIM4Z7+pzNz9/8V3ByGQ="/>
+        <field:datetime dateTimePattern="${purchaseOrder_startdate_date_format}" field="StartDate" id="c_ee_ut_model_PurchaseOrder_StartDate" z="NgdKbDwKFJ7YpviTW3uL9j/P2co="/>
+        <field:datetime dateTimePattern="${purchaseOrder_enddate_date_format}" field="EndDate" id="c_ee_ut_model_PurchaseOrder_EndDate" z="PWyGsvN9e1PVeIkGHKK03CLTg8g="/>
+        <field:input field="ConstructionSite" id="c_ee_ut_model_PurchaseOrder_ConstructionSite" z="nkCFKkqNrK8+lGWJgFAmV3364O8="/>
+        <field:input field="SiteEngineer" id="c_ee_ut_model_PurchaseOrder_SiteEngineer" z="oS7qD8PYpxPcnzQkXBA3lBFLAw8="/>
+        <field:input field="TotalCost" id="c_ee_ut_model_PurchaseOrder_TotalCost" z="zpWGIysIPlUPUdp7bsWomXzAkOE="/>
+        <field:select field="PlantID" id="c_ee_ut_model_PurchaseOrder_PlantID" itemValue="id" items="${plants}" path="/plants" z="1O3tiGONqz3C4HgabCkwdSvzaOg="/>
+        <field:datetime dateTimePattern="${purchaseOrder_porecieveddate_date_format}" field="PORecievedDate" id="c_ee_ut_model_PurchaseOrder_PORecievedDate" z="PieavnbWxc6bzMREJukIV4+dTCM="/>
+    </form:update>
+</div>

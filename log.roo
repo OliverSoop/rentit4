@@ -7,3 +7,36 @@ web mvc setup
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-09-30 13:26:19
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-06 19:46:55
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-06 22:46:20
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-08 00:03:42
+focus --class ~.model.Plant
+field string --fieldName Name
+field number --type double --fieldName CostPerDay
+field string --fieldName Description
+exit
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-08 00:09:06
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-08 00:09:25
+entity jpa --class ~.model.PurchaseOrder
+field string --fieldName ExternalID
+field number --type int --fieldName PlantID
+field date --type java.util.Date --fieldName StarDate
+field date --type java.util.Date --fieldName EndDate
+field string --fieldName ConstructionSite
+field string --fieldName SiteEngineer
+field number --type double --fieldName TotalCost
+field date --type java.util.Date --fieldName POrecievedDate
+enum type --class ~.domain.POstatus
+enum constant --name RECIEVED
+enum constant --name ACCEPTED
+enum constant --name REJECTED
+field enum --type ~.domain.POstatus --fieldName Status
+field date --type java.util.Date --fieldName ReturnDate
+focus --class ~.model.PurchaseOrder
+// [failed] field reference --fieldName PlantID --type ~.model.Plant --cardinality MANY_TO_ONE
+// [failed] field reference --fieldName PlantID --type ~.model.Plant --cardinality MANY_TO_ONE
+field reference --fieldName PlantID --type ~.model.Plant --cardinality MANY_TO_ONE
+// [failed] field reference --fieldName PlantID --type ~.model.Plant --cardinality MANY_TO_ONE
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-08 00:37:43
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-08 00:38:00
+web mvc all --package ~.web
+web mvc all --package ~.web
+web mvc all --package ~.web
