@@ -5,3 +5,5 @@ project --topLevelPackage ee.ut --projectName RentIT --java 7 --packaging JAR
 jpa setup --database POSTGRES --provider HIBERNATE --databaseName rentIT --hostName postgres --userName postgres --password kalamaja
 web mvc setup
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-09-30 13:26:19
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-06 19:46:55
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-06 22:46:20
