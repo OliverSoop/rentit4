@@ -3,10 +3,12 @@
 
 package ee.ut.web;
 
+import ee.ut.domain.POstatus;
 import ee.ut.model.Plant;
 import ee.ut.model.PurchaseOrder;
 import ee.ut.web.PurchaseOrderController;
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
@@ -93,11 +95,13 @@ privileged aspect PurchaseOrderController_Roo_Controller {
         uiModel.addAttribute("purchaseOrder_startdate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
         uiModel.addAttribute("purchaseOrder_enddate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
         uiModel.addAttribute("purchaseOrder_porecieveddate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+        uiModel.addAttribute("purchaseOrder_returndate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
     }
     
     void PurchaseOrderController.populateEditForm(Model uiModel, PurchaseOrder purchaseOrder) {
         uiModel.addAttribute("purchaseOrder", purchaseOrder);
         addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("postatuses", Arrays.asList(POstatus.values()));
         uiModel.addAttribute("plants", Plant.findAllPlants());
     }
     

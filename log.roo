@@ -40,3 +40,12 @@ field reference --fieldName PlantID --type ~.model.Plant --cardinality MANY_TO_O
 web mvc all --package ~.web
 web mvc all --package ~.web
 web mvc all --package ~.web
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-08 00:55:47
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-09 21:23:39
+focus --class ~.model.PurchaseOrder
+field enum --type ~.domain.POstatus --fieldName Status
+field date --type java.util.Date --fieldName ReturnDate
+// [failed] focus --class ~.model
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-09 21:34:18
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-09 21:34:31
+web mvc all --package ~.web

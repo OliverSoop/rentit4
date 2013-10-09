@@ -2,10 +2,12 @@ package ee.ut.model;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
+import javax.persistence.Enumerated;
 import java.util.Date;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
+import ee.ut.domain.POstatus;
 import javax.persistence.ManyToOne;
 
 @RooJavaBean
@@ -49,6 +51,17 @@ public class PurchaseOrder {
 
     /**
      */
+    @Enumerated
+    private POstatus Status;
+
+    /**
+     */
     @ManyToOne
     private Plant PlantID;
+
+    /**
+     */
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(style = "M-")
+    private Date ReturnDate;
 }

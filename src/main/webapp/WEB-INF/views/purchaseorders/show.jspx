@@ -11,5 +11,7 @@
         <field:display field="totalCost" id="s_ee_ut_model_PurchaseOrder_TotalCost" object="${purchaseorder}" z="en05bVwUuaIyI2nhm+180lriOy0="/>
         <field:display field="plantID" id="s_ee_ut_model_PurchaseOrder_PlantID" object="${purchaseorder}" z="FXJ1ovUscri9GjOOlTk2MG2mEj8="/>
         <field:display date="true" dateTimePattern="${purchaseOrder_porecieveddate_date_format}" field="PORecievedDate" id="s_ee_ut_model_PurchaseOrder_PORecievedDate" object="${purchaseorder}" z="mZ21heV2bsfJ2Qc9bLhkO6lLZ5Y="/>
+        <field:display field="status" id="s_ee_ut_model_PurchaseOrder_Status" object="${purchaseorder}" z="cQ3znc+Op3nzBBvurGoQby69FnM="/>
+        <field:display date="true" dateTimePattern="${purchaseOrder_returndate_date_format}" field="returnDate" id="s_ee_ut_model_PurchaseOrder_ReturnDate" object="${purchaseorder}" z="6+eIN2gnKQsAs4ewWPq35ViXDnU="/>
     </page:show>
 </div>

@@ -11,6 +11,8 @@
         <field:input field="TotalCost" id="c_ee_ut_model_PurchaseOrder_TotalCost" z="zpWGIysIPlUPUdp7bsWomXzAkOE="/>
         <field:select field="PlantID" id="c_ee_ut_model_PurchaseOrder_PlantID" itemValue="id" items="${plants}" path="/plants" z="1O3tiGONqz3C4HgabCkwdSvzaOg="/>
         <field:datetime dateTimePattern="${purchaseOrder_porecieveddate_date_format}" field="PORecievedDate" id="c_ee_ut_model_PurchaseOrder_PORecievedDate" z="PieavnbWxc6bzMREJukIV4+dTCM="/>
+        <field:select field="Status" id="c_ee_ut_model_PurchaseOrder_Status" items="${postatuses}" path="postatuses" z="GBDNw7vr650eWJDGYoo2yGQJJ/I="/>
+        <field:datetime dateTimePattern="${purchaseOrder_returndate_date_format}" field="ReturnDate" id="c_ee_ut_model_PurchaseOrder_ReturnDate" z="2mxnGmZ+hkLtprgLpArsbSPokzA="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_ee_ut_model_PurchaseOrder" render="${not empty dependencies}" z="e92cPDHZqclsb7jq0SMbQPnO5Z8="/>
 </div>

@@ -3,6 +3,7 @@
 
 package ee.ut.model;
 
+import ee.ut.domain.POstatus;
 import ee.ut.model.Plant;
 import ee.ut.model.PurchaseOrder;
 import java.util.Date;
@@ -65,12 +66,28 @@ privileged aspect PurchaseOrder_Roo_JavaBean {
         this.PORecievedDate = PORecievedDate;
     }
     
+    public POstatus PurchaseOrder.getStatus() {
+        return this.Status;
+    }
+    
+    public void PurchaseOrder.setStatus(POstatus Status) {
+        this.Status = Status;
+    }
+    
     public Plant PurchaseOrder.getPlantID() {
         return this.PlantID;
     }
     
     public void PurchaseOrder.setPlantID(Plant PlantID) {
         this.PlantID = PlantID;
+    }
+    
+    public Date PurchaseOrder.getReturnDate() {
+        return this.ReturnDate;
+    }
+    
+    public void PurchaseOrder.setReturnDate(Date ReturnDate) {
+        this.ReturnDate = ReturnDate;
     }
     
 }
