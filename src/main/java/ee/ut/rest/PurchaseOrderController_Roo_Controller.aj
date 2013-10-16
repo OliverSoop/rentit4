@@ -4,14 +4,15 @@
 package ee.ut.rest;
 
 import ee.ut.domain.POstatus;
-import ee.ut.model.Plant;
 import ee.ut.model.PurchaseOrder;
+import ee.ut.repository.PlantRepository;
 import ee.ut.rest.PurchaseOrderController;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +24,9 @@ import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
 
 privileged aspect PurchaseOrderController_Roo_Controller {
+    
+    @Autowired
+    PlantRepository PurchaseOrderController.plantRepository;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String PurchaseOrderController.create(@Valid PurchaseOrder purchaseOrder, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -102,7 +106,7 @@ privileged aspect PurchaseOrderController_Roo_Controller {
         uiModel.addAttribute("purchaseOrder", purchaseOrder);
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("postatuses", Arrays.asList(POstatus.values()));
-        uiModel.addAttribute("plants", Plant.findAllPlants());
+        uiModel.addAttribute("plants", plantRepository.findAll());
     }
     
     String PurchaseOrderController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

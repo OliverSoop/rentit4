@@ -59,3 +59,7 @@ class --class ~.rest.PlantResource
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-16 22:17:51
 test mock --entity ~.rest.PurchaseOrderController
 repository jpa --interface ~.repository.PlantRepository --entity ~.model.Plant
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-17 00:28:12
+perform tests
+perform tests
+perform tests

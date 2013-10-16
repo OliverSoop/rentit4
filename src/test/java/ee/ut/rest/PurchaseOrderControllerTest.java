@@ -21,8 +21,8 @@ import ee.ut.domain.POstatus;
 import ee.ut.model.Plant;
 import ee.ut.repository.PlantRepository;
 
-@RunWith(JUnit4.class)
-@MockStaticEntityMethods
+// @RunWith(JUnit4.class)
+// @MockStaticEntityMethods
 public class PurchaseOrderControllerTest {
 
 	@Autowired
