@@ -1,11 +1,10 @@
-package ee.ut.web;
+package ee.ut.rest;
 
 import java.net.URI;
 
 import ee.ut.domain.POstatus;
 import ee.ut.model.Plant;
 import ee.ut.model.PurchaseOrder;
-import ee.ut.rest.PurchaseOrderResource;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -28,23 +27,7 @@ public class PurchaseOrderController {
 			@RequestBody PurchaseOrderResource por) {
 
 		PurchaseOrder po = new PurchaseOrder();
-		Plant plant = new Plant();
-		plant.setDescription(por.getPlantID().getDescription());
-		plant.setName(por.getPlantID().getName());
-		plant.setCostPerDay(por.getPlantID().getCostPerDay());
-		plant.persist();
-
-		po.setExternalID(por.getExternalID());
-		po.setPlantID(plant);
-		po.setStartDate(por.getStartDate());
-		po.setEndDate(por.getEndDate());
-		po.setConstructionSite(por.getConstructionSite());
-		po.setSiteEngineer(por.getSiteEngineer());
-		po.setTotalCost(por.getTotalCost());
-		po.setPORecievedDate(por.getPOrecievedDate());
-		po.setStatus(POstatus.RECIEVED);
-		po.setReturnDate(por.getReturnDate());
-		po.persist();
+		Plant plant = Plant.findPlant(por.getPlantID());
 
 		HttpHeaders headers = new HttpHeaders();
 		URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
@@ -52,6 +35,24 @@ public class PurchaseOrderController {
 		headers.setLocation(location);
 		ResponseEntity<Void> response = new ResponseEntity<>(headers,
 				HttpStatus.CREATED);
+
+		if (plant != null) {
+			response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+		else {
+			po.setExternalID(por.getExternalID());
+			po.setPlantID(plant);
+			po.setStartDate(por.getStartDate());
+			po.setEndDate(por.getEndDate());
+			po.setConstructionSite(por.getConstructionSite());
+			po.setSiteEngineer(por.getSiteEngineer());
+			po.setTotalCost(por.getTotalCost());
+			po.setPORecievedDate(por.getPOrecievedDate());
+			po.setStatus(POstatus.RECIEVED);
+			po.setReturnDate(por.getReturnDate());
+			po.persist();
+		}
 		return response;
 
 	}
@@ -61,14 +62,11 @@ public class PurchaseOrderController {
 			@RequestBody PurchaseOrderResource por) {
 
 		PurchaseOrder po = PurchaseOrder.findPurchaseOrder(id);
-		Plant plant = new Plant();
-		plant.setDescription(por.getPlantID().getDescription());
-		plant.setName(por.getPlantID().getName());
-		plant.setCostPerDay(por.getPlantID().getCostPerDay());
-		plant.persist();
-		ResponseEntity<Void> response;
 
-		if (po != null) {
+		ResponseEntity<Void> response;
+		Plant plant = Plant.findPlant(por.getPlantID());
+
+		if (po != null && plant != null) {
 			po.setExternalID(por.getExternalID());
 			po.setPlantID(plant);
 			po.setStartDate(por.getStartDate());

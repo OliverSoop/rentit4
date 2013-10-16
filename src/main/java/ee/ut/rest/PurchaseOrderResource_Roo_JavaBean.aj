@@ -4,7 +4,6 @@
 package ee.ut.rest;
 
 import ee.ut.domain.POstatus;
-import ee.ut.rest.PlantResource;
 import ee.ut.rest.PurchaseOrderResource;
 import java.util.Date;
 
@@ -18,11 +17,11 @@ privileged aspect PurchaseOrderResource_Roo_JavaBean {
         this.ExternalID = ExternalID;
     }
     
-    public PlantResource PurchaseOrderResource.getPlantID() {
+    public Long PurchaseOrderResource.getPlantID() {
         return this.plantID;
     }
     
-    public void PurchaseOrderResource.setPlantID(PlantResource plantID) {
+    public void PurchaseOrderResource.setPlantID(Long plantID) {
         this.plantID = plantID;
     }
     

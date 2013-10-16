@@ -15,7 +15,7 @@ import ee.ut.model.Plant;
 public class PurchaseOrderResource {
 	
 	private String ExternalID;
-	private PlantResource plantID;
+	private Long plantID;
 	private Date startDate;
     private Date endDate;
 	private String ConstructionSite;

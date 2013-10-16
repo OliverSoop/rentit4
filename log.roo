@@ -55,3 +55,6 @@ class --class ~.rest.PurchaseOrderResourceAssembler
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-16 03:15:20
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-16 19:27:50
 class --class ~.rest.PlantResource
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-16 22:17:28
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-16 22:17:51
+test mock --entity ~.rest.PurchaseOrderController

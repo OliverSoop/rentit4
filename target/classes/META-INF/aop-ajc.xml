@@ -8,10 +8,10 @@
 <aspect name="ee.ut.model.Plant_Roo_Jpa_ActiveRecord"/>
 <aspect name="ee.ut.model.PurchaseOrder_Roo_Jpa_ActiveRecord"/>
 <aspect name="ee.ut.rest.PurchaseOrderResource_Roo_JavaBean"/>
-<aspect name="ee.ut.web.PurchaseOrderController_Roo_Controller"/>
 <aspect name="ee.ut.rest.PlantResource_Roo_JavaBean"/>
 <aspect name="ee.ut.model.Plant_Roo_JavaBean"/>
 <aspect name="ee.ut.model.Plant_Roo_ToString"/>
+<aspect name="ee.ut.rest.PurchaseOrderController_Roo_Controller"/>
 <aspect name="ee.ut.web.PlantController_Roo_Controller"/>
 <aspect name="ee.ut.model.PurchaseOrder_Roo_Configurable"/>
 <aspect name="ee.ut.model.Plant_Roo_Jpa_Entity"/>
