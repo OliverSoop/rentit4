@@ -5,7 +5,9 @@ package ee.ut.web;
 
 import ee.ut.model.Plant;
 import ee.ut.model.PurchaseOrder;
+import ee.ut.repository.PlantRepository;
 import ee.ut.web.ApplicationConversionServiceFactoryBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
@@ -13,6 +15,9 @@ import org.springframework.format.FormatterRegistry;
 privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService {
     
     declare @type: ApplicationConversionServiceFactoryBean: @Configurable;
+    
+    @Autowired
+    PlantRepository ApplicationConversionServiceFactoryBean.plantRepository;
     
     public Converter<Plant, String> ApplicationConversionServiceFactoryBean.getPlantToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<ee.ut.model.Plant, java.lang.String>() {
@@ -25,7 +30,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Long, Plant> ApplicationConversionServiceFactoryBean.getIdToPlantConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, ee.ut.model.Plant>() {
             public ee.ut.model.Plant convert(java.lang.Long id) {
-                return Plant.findPlant(id);
+                return plantRepository.findOne(id);
             }
         };
     }
