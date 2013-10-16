@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_ee_ut_model_PurchaseOrder" items="${purchaseorders}" z="HPkHn/raeiPxTnitq2g/1bTwioo=">
+        <table:table data="${purchaseorders}" id="l_ee_ut_model_PurchaseOrder" path="/rest/purchaseorders" z="8xQ8gWBg5wMaWV6TB/sVmy/L2LI=">
+            <table:column id="c_ee_ut_model_PurchaseOrder_ExternalID" property="externalID" z="eM4sx347cFRvf87RRB4YTPu3E2Y="/>
+            <table:column date="true" dateTimePattern="${purchaseOrder_startdate_date_format}" id="c_ee_ut_model_PurchaseOrder_StartDate" property="startDate" z="tbJLMcTiGJsV0rgEQpIk/m/nfdg="/>
+            <table:column date="true" dateTimePattern="${purchaseOrder_enddate_date_format}" id="c_ee_ut_model_PurchaseOrder_EndDate" property="endDate" z="7r4AlHnvx71Yg8ZA5bQ+Yh4ceN0="/>
+            <table:column id="c_ee_ut_model_PurchaseOrder_ConstructionSite" property="constructionSite" z="U0e02eCnzYNEn1cuBQhJQTQmGKg="/>
+            <table:column id="c_ee_ut_model_PurchaseOrder_SiteEngineer" property="siteEngineer" z="hPV2/Nc2iZ4AmRpHT0wYk9TBvkc="/>
+            <table:column id="c_ee_ut_model_PurchaseOrder_TotalCost" property="totalCost" z="QmPIp8ZnXNVuyc+hbmjclLOUqbM="/>
+        </table:table>
+    </page:list>
+</div>

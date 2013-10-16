@@ -28,17 +28,17 @@ privileged aspect PurchaseOrderController_Roo_Controller {
     public String PurchaseOrderController.create(@Valid PurchaseOrder purchaseOrder, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, purchaseOrder);
-            return "purchaseorders/create";
+            return "/rest/purchaseorders/create";
         }
         uiModel.asMap().clear();
         purchaseOrder.persist();
-        return "redirect:/purchaseorders/" + encodeUrlPathSegment(purchaseOrder.getId().toString(), httpServletRequest);
+        return "redirect://rest/purchaseorders/" + encodeUrlPathSegment(purchaseOrder.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(params = "form", produces = "text/html")
     public String PurchaseOrderController.createForm(Model uiModel) {
         populateEditForm(uiModel, new PurchaseOrder());
-        return "purchaseorders/create";
+        return "/rest/purchaseorders/create";
     }
     
     @RequestMapping(value = "/{id}", produces = "text/html")
@@ -46,7 +46,7 @@ privileged aspect PurchaseOrderController_Roo_Controller {
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("purchaseorder", PurchaseOrder.findPurchaseOrder(id));
         uiModel.addAttribute("itemId", id);
-        return "purchaseorders/show";
+        return "/rest/purchaseorders/show";
     }
     
     @RequestMapping(produces = "text/html")
@@ -61,24 +61,24 @@ privileged aspect PurchaseOrderController_Roo_Controller {
             uiModel.addAttribute("purchaseorders", PurchaseOrder.findAllPurchaseOrders());
         }
         addDateTimeFormatPatterns(uiModel);
-        return "purchaseorders/list";
+        return "/rest/purchaseorders/list";
     }
     
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String PurchaseOrderController.update(@Valid PurchaseOrder purchaseOrder, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, purchaseOrder);
-            return "purchaseorders/update";
+            return "/rest/purchaseorders/update";
         }
         uiModel.asMap().clear();
         purchaseOrder.merge();
-        return "redirect:/purchaseorders/" + encodeUrlPathSegment(purchaseOrder.getId().toString(), httpServletRequest);
+        return "redirect://rest/purchaseorders/" + encodeUrlPathSegment(purchaseOrder.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String PurchaseOrderController.updateForm(@PathVariable("id") Long id, Model uiModel) {
         populateEditForm(uiModel, PurchaseOrder.findPurchaseOrder(id));
-        return "purchaseorders/update";
+        return "/rest/purchaseorders/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
@@ -88,7 +88,7 @@ privileged aspect PurchaseOrderController_Roo_Controller {
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
-        return "redirect:/purchaseorders";
+        return "redirect://rest/purchaseorders";
     }
     
     void PurchaseOrderController.addDateTimeFormatPatterns(Model uiModel) {
