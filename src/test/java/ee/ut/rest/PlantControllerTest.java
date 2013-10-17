@@ -9,12 +9,14 @@ import javax.ws.rs.core.MediaType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
+import org.springframework.mock.staticmock.MockStaticEntityMethods;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 @RunWith(JUnit4.class)
+@MockStaticEntityMethods
 public class PlantControllerTest {
 	
 	private static String DOMAIN_URL = "http://rentit4.herokuapp.com/";

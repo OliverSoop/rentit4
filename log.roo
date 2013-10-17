@@ -63,3 +63,17 @@ repository jpa --interface ~.repository.PlantRepository --entity ~.model.Plant
 perform tests
 perform tests
 perform tests
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-17 21:00:50
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-17 21:02:03
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-17 21:32:54
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-17 21:35:32
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-17 21:36:43
+perform tests
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-17 21:38:30
+perform tests
+perform tests
+perform tests
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-10-17 21:59:16
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-10-17 22:15:31
+perform tests
+perform tests
