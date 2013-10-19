@@ -10,7 +10,6 @@ import javax.ws.rs.core.MediaType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.staticmock.MockStaticEntityMethods;
 
 import com.sun.jersey.api.client.Client;
@@ -18,15 +17,10 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 import ee.ut.domain.POstatus;
-import ee.ut.model.Plant;
-import ee.ut.repository.PlantRepository;
 
 @RunWith(JUnit4.class)
 @MockStaticEntityMethods
 public class PurchaseOrderControllerTest {
-
-	@Autowired
-	PlantRepository plantRepository;
 
 	private static String DOMAIN_URL = "http://rentit4.herokuapp.com/";
 
@@ -61,12 +55,10 @@ public class PurchaseOrderControllerTest {
 
 		ClientResponse response = createPurchaseOrderResource();
 		URI uri = response.getLocation();
-
 		Client client = Client.create();
-		WebResource webResource = client.resource(uri);
+		WebResource webResource = client.resource(uri.toString() + "/cancel");
 		ClientResponse cancelResponse = webResource
-				.type(MediaType.APPLICATION_XML)
-				.accept(MediaType.APPLICATION_XML).delete(ClientResponse.class);
+				.post(ClientResponse.class);
 		assertTrue(cancelResponse.getStatus() == ClientResponse.Status.OK
 				.getStatusCode());
 
@@ -84,36 +76,32 @@ public class PurchaseOrderControllerTest {
 		WebResource webResource = client.resource(DOMAIN_URL
 				+ "rest/purchaseorders");
 
-		Plant plant = new Plant();
 		PurchaseOrderResource por = new PurchaseOrderResource();
-		plant.persist();
 
 		por.setExternalID("1");
-		por.setPlantID(por.getPlantID());
+		por.setPlantID(createPlantResource());
 		por.setStartDate(new Date());
 		por.setEndDate(new Date());
 		por.setConstructionSite("Liivi 2");
 		por.setSiteEngineer("Toivo");
-		por.setTotalCost(por.getTotalCost());
-		por.setPOrecievedDate(por.getPOrecievedDate());
+		por.setTotalCost(32.0F);
+		por.setPOrecievedDate(new Date());
 		por.setStatus(POstatus.RECIEVED);
 		por.setReturnDate(new Date());
 
 		return webResource.type(MediaType.APPLICATION_XML)
 				.accept(MediaType.APPLICATION_XML)
-				.post(ClientResponse.class, plant);
+				.post(ClientResponse.class, por);
 	}
 
 	private ClientResponse modifyPurchaseOrderResource(URI uri) {
 		Client client = Client.create();
-		WebResource webResource = client.resource(uri);
+		WebResource webResource = client.resource(uri.toString() + "/modify");
 
-		Plant plant = new Plant();
 		PurchaseOrderResource por = new PurchaseOrderResource();
-		plant.persist();
 
 		por.setExternalID("2");
-		por.setPlantID(por.getPlantID());
+		por.setPlantID(createPlantResource());
 		por.setStartDate(new Date());
 		por.setEndDate(new Date());
 		por.setConstructionSite("Liivi 4");
@@ -127,4 +115,21 @@ public class PurchaseOrderControllerTest {
 				.accept(MediaType.APPLICATION_XML)
 				.post(ClientResponse.class, por);
 	}
+	
+    private Long createPlantResource() {
+    	Client client = Client.create();
+    	WebResource webResource = client.resource(DOMAIN_URL + "rest/plant");
+    	
+		PlantResource plant = new PlantResource();
+		plant.setName("Hammer");
+		plant.setCostPerDay(44.0);
+		plant.setDescription("Its a hammer");
+
+    	ClientResponse res = webResource
+    			.type(MediaType.APPLICATION_XML)
+				.accept(MediaType.APPLICATION_XML)
+				.post(ClientResponse.class, plant);
+    	URI path = res.getLocation();
+    	return Long.valueOf(path.getRawPath().substring(path.getRawPath().lastIndexOf('/') + 1));
+    }
 }

@@ -4,13 +4,13 @@ import ee.ut.model.Plant;
 
 public class PlantResourceAssembler {
 	
-	public static PlantResource create(Plant phr) {
-		PlantResource plant = new PlantResource();
-		plant.setName(phr.getName());
-		plant.setCostPerDay(phr.getCostPerDay());
-		plant.setDescription(phr.getDescription());
+	public static PlantResource create(Plant plant) {
+		PlantResource plantResource = new PlantResource();
+		plantResource.setName(plant.getName());
+		plantResource.setCostPerDay(plant.getCostPerDay());
+		plantResource.setDescription(plant.getDescription());
 		
-		return plant;
+		return plantResource;
 	}
 
 }

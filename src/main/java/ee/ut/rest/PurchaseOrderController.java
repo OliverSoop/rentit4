@@ -30,17 +30,11 @@ public class PurchaseOrderController {
 		Plant plant = Plant.findPlant(por.getPlantID());
 
 		HttpHeaders headers = new HttpHeaders();
-		URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
-				.pathSegment(po.getId().toString()).build().toUri();
-		headers.setLocation(location);
-		ResponseEntity<Void> response = new ResponseEntity<>(headers,
-				HttpStatus.CREATED);
-
-		if (plant != null) {
+		
+		ResponseEntity<Void> response;
+		if (plant == null) {
 			response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-
-		else {
+		} else {
 			po.setExternalID(por.getExternalID());
 			po.setPlantID(plant);
 			po.setStartDate(por.getStartDate());
@@ -52,9 +46,13 @@ public class PurchaseOrderController {
 			po.setStatus(POstatus.RECIEVED);
 			po.setReturnDate(por.getReturnDate());
 			po.persist();
+			URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
+					.pathSegment(po.getId().toString()).build().toUri();
+			headers.setLocation(location);
+			response = new ResponseEntity<>(headers,
+					HttpStatus.CREATED);
 		}
 		return response;
-
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/{id}/modify")
