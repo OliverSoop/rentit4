@@ -1,8 +1,7 @@
 package ee.ut.rest.controller;
 
 import java.net.URI;
-import java.util.Collections;
-
+import java.util.ArrayList;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-
 import ee.ut.model.Plant;
 import ee.ut.rest.PlantResource;
 import ee.ut.rest.PlantResourceAssembler;
+import ee.ut.rest.PlantResourceList;
 
 @Controller
 @RequestMapping("/rest/plant")
@@ -36,11 +35,11 @@ public class PlantRestController {
 	
 	@RequestMapping
 	(method = RequestMethod.POST, value ="")
-	public ResponseEntity<Void> createPlantRequest(@RequestBody PlantResource phr) {
+	public ResponseEntity<Void> createPlantRequest(@RequestBody PlantResource res) {
 		Plant plant = new Plant();
-		plant.setName(phr.getName());
-		plant.setCostPerDay(phr.getCostPerDay());
-		plant.setDescription(phr.getDescription());
+		plant.setName(res.getName());
+		plant.setCostPerDay(res.getCostPerDay());
+		plant.setDescription(res.getDescription());
 		
 		plant.persist();
 		 
@@ -52,5 +51,17 @@ public class PlantRestController {
 		ResponseEntity<Void> response = new ResponseEntity<Void>(headers, HttpStatus.CREATED);
 		return response;
 	}
+
+	@RequestMapping
+	(method = RequestMethod.GET, value = "")
+	public ResponseEntity<PlantResourceList> getAllPlants() {
+		ArrayList<Plant> pos = (ArrayList<Plant>) Plant.findAllPlants();
+		PlantResourceAssembler assembler = new PlantResourceAssembler();
+		PlantResourceList resList = assembler.create(pos);
+		
+		ResponseEntity<PlantResourceList> response =  new ResponseEntity<PlantResourceList>(resList, HttpStatus.OK);
+		return response;
+	}
+	
 
 }

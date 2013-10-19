@@ -1,10 +1,11 @@
-package ee.ut.rest;
+package ee.ut.rest.controller;
 
 import java.net.URI;
 
 import ee.ut.domain.POstatus;
 import ee.ut.model.Plant;
 import ee.ut.model.PurchaseOrder;
+import ee.ut.rest.PurchaseOrderResource;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
