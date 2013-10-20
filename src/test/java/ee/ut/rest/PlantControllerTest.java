@@ -28,6 +28,16 @@ public class PlantControllerTest {
     	assertTrue(getPlantResource(location).getStatus() == ClientResponse.Status.OK.getStatusCode());
     }
     
+    @Test
+    public void testGetPlantList() {
+    	Client client = Client.create();
+    	WebResource webResource = client.resource(DOMAIN_URL + "rest/plant");
+    	ClientResponse listResponse = webResource.type(MediaType.APPLICATION_XML)
+												.accept(MediaType.APPLICATION_XML)
+												.get(ClientResponse.class);
+    	assertTrue(listResponse.getStatus() == ClientResponse.Status.OK.getStatusCode());
+    }
+    
     private ClientResponse getPlantResource(URI location) {
     	Client client = Client.create();
     	WebResource webResource = client.resource(location);

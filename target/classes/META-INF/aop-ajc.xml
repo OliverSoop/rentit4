@@ -3,8 +3,8 @@
 <aspect name="ee.ut.model.PurchaseOrder_Roo_ToString"/>
 <aspect name="ee.ut.model.PurchaseOrder_Roo_Jpa_Entity"/>
 <aspect name="ee.ut.repository.PlantRepository_Roo_Jpa_Repository"/>
-<aspect name="ee.ut.model.PurchaseOrder_Roo_JavaBean"/>
 <aspect name="ee.ut.model.Plant_Roo_Configurable"/>
+<aspect name="ee.ut.model.PurchaseOrder_Roo_JavaBean"/>
 <aspect name="ee.ut.model.Plant_Roo_Jpa_ActiveRecord"/>
 <aspect name="ee.ut.web.ApplicationConversionServiceFactoryBean_Roo_ConversionService"/>
 <aspect name="ee.ut.rest.PurchaseOrderResource_Roo_JavaBean"/>
