@@ -108,7 +108,7 @@ public class PurchaseOrderControllerTest {
 		por.setSiteEngineer("Maimu");
 		por.setTotalCost(por.getTotalCost());
 		por.setPOrecievedDate(por.getPOrecievedDate());
-		por.setStatus(POstatus.MODIFICATION_REQUESTED);
+		por.setStatus(POstatus.PENDING_UPDATE);
 		por.setReturnDate(new Date());
 
 		return webResource.type(MediaType.APPLICATION_XML)
