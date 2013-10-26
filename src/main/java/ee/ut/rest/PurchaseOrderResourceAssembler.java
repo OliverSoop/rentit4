@@ -3,13 +3,13 @@ package ee.ut.rest;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import ee.ut.model.PurchaseOrder;
-import ee.ut.rest.controller.PurchaseOrderController;
+import ee.ut.rest.controller.PurchaseOrderRestController;
 
 public class PurchaseOrderResourceAssembler extends
 		ResourceAssemblerSupport<PurchaseOrder, PurchaseOrderResource> {
 
 	public PurchaseOrderResourceAssembler() {
-		super(PurchaseOrderController.class, PurchaseOrderResource.class);
+		super(PurchaseOrderRestController.class, PurchaseOrderResource.class);
 	}
 
 	public static PurchaseOrderResource submit(PurchaseOrder po) {

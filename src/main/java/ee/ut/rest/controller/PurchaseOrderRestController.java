@@ -5,17 +5,9 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import java.lang.reflect.Method;
 import java.net.URI;
 
-import ee.ut.domain.POstatus;
-import ee.ut.model.Plant;
-import ee.ut.model.PurchaseOrder;
-import ee.ut.rest.PurchaseOrderResource;
-import ee.ut.rest.PurchaseOrderResourceAssembler;
-import ee.ut.util.ExtendedLink;
-
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,10 +15,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import ee.ut.domain.POstatus;
+import ee.ut.model.Plant;
+import ee.ut.model.PurchaseOrder;
+import ee.ut.rest.PurchaseOrderResource;
+import ee.ut.rest.PurchaseOrderResourceAssembler;
+import ee.ut.util.ExtendedLink;
+
 @RequestMapping("/rest/purchaseorders")
 @Controller
-@RooWebScaffold(path = "/rest/purchaseorders", formBackingObject = PurchaseOrder.class)
-public class PurchaseOrderController {
+public class PurchaseOrderRestController {
 
 	@RequestMapping(method = RequestMethod.POST, value = "")
 	public ResponseEntity<PurchaseOrderResource> createPO(@RequestBody PurchaseOrderResource por) {
@@ -123,40 +121,40 @@ public class PurchaseOrderController {
 
 			switch (po.getStatus()) {
 			case PENDING_CONFIRMATION:
-				Method _rejectPO = PurchaseOrderController.class.getMethod(
+				Method _rejectPO = PurchaseOrderRestController.class.getMethod(
 						"rejectPO", Long.class);
 				String rejectLink = linkTo(_rejectPO, po.getId()).toUri()
 						.toString();
 				resource.add(new ExtendedLink(rejectLink, "rejectPO", "DELETE"));
 
-				Method _acceptPO = PurchaseOrderController.class.getMethod(
+				Method _acceptPO = PurchaseOrderRestController.class.getMethod(
 						"acceptPO", Long.class);
 				String acceptLink = linkTo(_acceptPO, po.getId()).toUri()
 						.toString();
 				resource.add(new ExtendedLink(acceptLink, "acceptPO", "POST"));
 			case REJECTED:
 			case OPEN:
-				Method _closePO = PurchaseOrderController.class.getMethod(
+				Method _closePO = PurchaseOrderRestController.class.getMethod(
 						"closePO", Long.class);
 				String closeLink = linkTo(_closePO, po.getId()).toUri()
 						.toString();
 				resource.add(new ExtendedLink(closeLink, "closePO", "DELETE"));
 
-				Method _requestPOUpdate = PurchaseOrderController.class
+				Method _requestPOUpdate = PurchaseOrderRestController.class
 						.getMethod("requestPOUpdate", Long.class);
 				String updateLink = linkTo(_requestPOUpdate, po.getId())
 						.toUri().toString();
 				resource.add(new ExtendedLink(updateLink, "requestPOUpdate",
 						"POST"));
 			case PENDING_UPDATE:
-				Method _rejectPOUpdate = PurchaseOrderController.class
+				Method _rejectPOUpdate = PurchaseOrderRestController.class
 						.getMethod("rejectPOUpdate", Long.class);
 				String rejectPOUpdateLink = linkTo(_rejectPOUpdate, po.getId())
 						.toUri().toString();
 				resource.add(new ExtendedLink(rejectPOUpdateLink,
 						"rejectPOUpdate", "DELETE"));
 
-				Method _acceptPOUpdate = PurchaseOrderController.class
+				Method _acceptPOUpdate = PurchaseOrderRestController.class
 						.getMethod("acceptPOUpdate", Long.class);
 				String acceptPOUpdateLink = linkTo(_acceptPOUpdate, po.getId())
 						.toUri().toString();
