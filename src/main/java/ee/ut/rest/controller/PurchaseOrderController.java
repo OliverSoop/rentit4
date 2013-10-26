@@ -29,14 +29,13 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 public class PurchaseOrderController {
 
 	@RequestMapping(method = RequestMethod.POST, value = "")
-	public ResponseEntity<Void> createPO(@RequestBody PurchaseOrderResource por) {
+	public ResponseEntity<PurchaseOrderResource> createPO(@RequestBody PurchaseOrderResource por) {
 
 		PurchaseOrder po = new PurchaseOrder();
 		Plant plant = Plant.findPlant(por.getPlantID());
 
 		HttpHeaders headers = new HttpHeaders();
-
-		ResponseEntity<Void> response;
+		ResponseEntity<PurchaseOrderResource> response;
 		if (plant == null) {
 			response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
@@ -51,10 +50,17 @@ public class PurchaseOrderController {
 			po.setStatus(POstatus.RECIEVED);
 			po.setReturnDate(por.getReturnDate());
 			po.persist();
+			
+			
+			PurchaseOrderResourceAssembler assembler = new PurchaseOrderResourceAssembler();
+			PurchaseOrderResource resource = assembler.toResource(po);
+			
+			
 			URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
 					.pathSegment(po.getId().toString()).build().toUri();
 			headers.setLocation(location);
-			response = new ResponseEntity<>(headers, HttpStatus.CREATED);
+			response = new ResponseEntity<>(
+					resource, HttpStatus.CREATED);
 		}
 		return response;
 	}
@@ -197,7 +203,7 @@ public class PurchaseOrderController {
 		PurchaseOrder po = PurchaseOrder.findPurchaseOrder(id);
 		ResponseEntity<Void> response;
 		if (po.getStatus().equals(POstatus.OPEN)) {
-			po.setStatus(POstatus.CANCELLED);
+			po.setStatus(POstatus.CLOSED);
 			response = new ResponseEntity<>(HttpStatus.OK);
 		} else
 			response = new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
