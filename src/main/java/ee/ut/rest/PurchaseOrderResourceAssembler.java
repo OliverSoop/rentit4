@@ -25,7 +25,7 @@ public class PurchaseOrderResourceAssembler extends
 		PlantResource plantResource;
 		if (por.getPlantID() != null) {
 			PlantResourceAssembler assembler = new PlantResourceAssembler();
-		//	plantResource = assembler.toResource(por.getPlantID());
+			plantResource = assembler.toResource(por.getPlantID());
 		//	por.setPlantID(plantResource);
 		}
 		return por;

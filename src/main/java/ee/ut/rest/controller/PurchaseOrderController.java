@@ -29,8 +29,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 public class PurchaseOrderController {
 
 	@RequestMapping(method = RequestMethod.POST, value = "")
-	public ResponseEntity<Void> submitPurchaseOrder(
-			@RequestBody PurchaseOrderResource por) {
+	public ResponseEntity<Void> createPO(@RequestBody PurchaseOrderResource por) {
 
 		PurchaseOrder po = new PurchaseOrder();
 		Plant plant = Plant.findPlant(por.getPlantID());
@@ -61,7 +60,7 @@ public class PurchaseOrderController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/{id}/modify")
-	public ResponseEntity<Void> updatePO(@PathVariable Long id,
+	public ResponseEntity<Void> requestPOUpdate(@PathVariable Long id,
 			@RequestBody PurchaseOrderResource por) {
 
 		PurchaseOrder po = PurchaseOrder.findPurchaseOrder(id);
@@ -112,43 +111,60 @@ public class PurchaseOrderController {
 			@PathVariable("id") Long id) throws NoSuchMethodException,
 			SecurityException {
 		PurchaseOrder po = PurchaseOrder.findPurchaseOrder(id);
-		PurchaseOrderResourceAssembler assembler = new PurchaseOrderResourceAssembler();
-		PurchaseOrderResource resource = assembler.toResource(po);
+		if (po != null) {
+			PurchaseOrderResourceAssembler assembler = new PurchaseOrderResourceAssembler();
+			PurchaseOrderResource resource = assembler.toResource(po);
 
-		switch (po.getStatus()) {
-		case PENDING_CONFIRMATION:
-			Method _rejectPO = PurchaseOrderController.class.getMethod(
-					"rejectPO", Long.class);
-			Method _acceptPO = PurchaseOrderController.class.getMethod(
-					"acceptPO", Long.class);
-			String acceptLink = linkTo(_acceptPO, po.getId()).toUri()
-					.toString();
-			resource.add(new ExtendedLink(acceptLink, "acceptPO", "POST"));
+			switch (po.getStatus()) {
+			case PENDING_CONFIRMATION:
+				Method _rejectPO = PurchaseOrderController.class.getMethod(
+						"rejectPO", Long.class);
+				String rejectLink = linkTo(_rejectPO, po.getId()).toUri()
+						.toString();
+				resource.add(new ExtendedLink(rejectLink, "rejectPO", "DELETE"));
 
-			String rejectLink = linkTo(_rejectPO, po.getId()).toUri()
-					.toString();
-			resource.add(new ExtendedLink(rejectLink, "rejectPO", "DELETE"));
-		case REJECTED:
-		case OPEN:
-			Method _closePO = PurchaseOrderController.class.getMethod(
-					"closePO", Long.class);
-			String closeLink = linkTo(_closePO, po.getId()).toUri().toString();
-			resource.add(new ExtendedLink(closeLink, "closePO", "DELETE"));
+				Method _acceptPO = PurchaseOrderController.class.getMethod(
+						"acceptPO", Long.class);
+				String acceptLink = linkTo(_acceptPO, po.getId()).toUri()
+						.toString();
+				resource.add(new ExtendedLink(acceptLink, "acceptPO", "POST"));
+			case REJECTED:
+			case OPEN:
+				Method _closePO = PurchaseOrderController.class.getMethod(
+						"closePO", Long.class);
+				String closeLink = linkTo(_closePO, po.getId()).toUri()
+						.toString();
+				resource.add(new ExtendedLink(closeLink, "closePO", "DELETE"));
 
-			Method _updatePO = PurchaseOrderController.class.getMethod(
-					"updatePO", Long.class);
-			String updateLink = linkTo(_updatePO, po.getId()).toUri()
-					.toString();
-			resource.add(new ExtendedLink(updateLink, "updatePO", "POST"));
-		case PENDING_UPDATE:
-			break;
-		default:
-			break;
+				Method _requestPOUpdate = PurchaseOrderController.class
+						.getMethod("requestPOUpdate", Long.class);
+				String updateLink = linkTo(_requestPOUpdate, po.getId())
+						.toUri().toString();
+				resource.add(new ExtendedLink(updateLink, "requestPOUpdate",
+						"POST"));
+			case PENDING_UPDATE:
+				Method _rejectPOUpdate = PurchaseOrderController.class
+						.getMethod("rejectPOUpdate", Long.class);
+				String rejectPOUpdateLink = linkTo(_rejectPOUpdate, po.getId())
+						.toUri().toString();
+				resource.add(new ExtendedLink(rejectPOUpdateLink,
+						"rejectPOUpdate", "DELETE"));
+
+				Method _acceptPOUpdate = PurchaseOrderController.class
+						.getMethod("acceptPOUpdate", Long.class);
+				String acceptPOUpdateLink = linkTo(_acceptPOUpdate, po.getId())
+						.toUri().toString();
+				resource.add(new ExtendedLink(acceptPOUpdateLink,
+						"acceptPOUpdate", "POST"));
+				break;
+			default:
+				break;
+			}
+			ResponseEntity<PurchaseOrderResource> response = new ResponseEntity<>(
+					resource, HttpStatus.OK);
+			return response;
 		}
-		ResponseEntity<PurchaseOrderResource> response = new ResponseEntity<>(
-				resource, HttpStatus.OK);
-		return response;
-
+		return new ResponseEntity<PurchaseOrderResource>(HttpStatus.NOT_FOUND);
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/pos/{id}/accept")
@@ -163,7 +179,7 @@ public class PurchaseOrderController {
 		return response;
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/pos/{id}/reject")
+	@RequestMapping(method = RequestMethod.DELETE, value = "/pos/{id}/reject")
 	public ResponseEntity<Void> rejectPO(@PathVariable Long id) {
 		PurchaseOrder po = PurchaseOrder.findPurchaseOrder(id);
 		if (po != null) {
@@ -182,6 +198,30 @@ public class PurchaseOrderController {
 		ResponseEntity<Void> response;
 		if (po.getStatus().equals(POstatus.OPEN)) {
 			po.setStatus(POstatus.CANCELLED);
+			response = new ResponseEntity<>(HttpStatus.OK);
+		} else
+			response = new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+		return response;
+	}
+
+	@RequestMapping(method = RequestMethod.DELETE, value = "/pos/{id}/updates")
+	public ResponseEntity<Void> rejectPOUpdate(@PathVariable("id") Long id) {
+		PurchaseOrder po = PurchaseOrder.findPurchaseOrder(id);
+		ResponseEntity<Void> response;
+		if (po.getStatus().equals(POstatus.PENDING_UPDATE)) {
+			po.setStatus(POstatus.UPDATE_REJECTED);
+			response = new ResponseEntity<>(HttpStatus.OK);
+		} else
+			response = new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+		return response;
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = "/pos/{id}/updates/{up.id}/accept")
+	public ResponseEntity<Void> acceptPOUpdate(@PathVariable("id") Long id) {
+		PurchaseOrder po = PurchaseOrder.findPurchaseOrder(id);
+		ResponseEntity<Void> response;
+		if (po.getStatus().equals(POstatus.PENDING_UPDATE)) {
+			po.setStatus(POstatus.OPEN);
 			response = new ResponseEntity<>(HttpStatus.OK);
 		} else
 			response = new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
