@@ -311,6 +311,11 @@
 			<artifactId>spring-data-jpa</artifactId>
 			<version>1.2.0.RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>org.jvnet.jax-ws-commons.spring</groupId>
+			<artifactId>jaxws-spring</artifactId>
+			<version>1.9</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
