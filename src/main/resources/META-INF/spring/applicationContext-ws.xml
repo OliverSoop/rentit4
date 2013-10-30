@@ -8,7 +8,11 @@
 			http://jax-ws.dev.java.net/spring/core
 			http://jax-ws.dev.java.net/spring/core.xsd
 			http://jax-ws.dev.java.net/spring/servlet
-			http://jax-ws.dev.java.net/spring/servlet.xsd">
-	<wss:binding url="/PlantSOAPService" service="#plantService"/>
-	<ws:service id="plantService" impl="ee.ut.soap.web.PlantSOAPService"/>
+			http://jax-ws.dev.java.net/spring/servlet.xsd">	
+	<wss:binding url="/PlantSOAPService">
+	  <wss:service>
+	    <ws:service bean="#plantService"/>
+	  </wss:service>
+	</wss:binding>
+	<bean id="plantService" class="ee.ut.soap.web.PlantSOAPService"/>
 </beans>
