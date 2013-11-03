@@ -18,6 +18,7 @@ import ee.ut.domain.POstatus;
 import ee.ut.model.Plant;
 import ee.ut.model.PurchaseOrder;
 import ee.ut.repository.PlantRepository;
+import ee.ut.soap.PlantResource;
 import ee.ut.soap.PlantResourceAssembler;
 import ee.ut.soap.PlantResourceList;
 import ee.ut.soap.PurchaseOrderResource;
@@ -70,6 +71,16 @@ public class PlantSOAPService extends SpringBeanAutowiringSupport {
 		} else {
 			throw new NotFoundException("Plant not found");
 		}
+	}
+	
+	@WebMethod
+	public PlantResource createPlant(@WebParam(targetNamespace = "http://web.soap.ut.ee/", name = "plant") PlantResource plantResource) {
+		Plant plant = new Plant();
+		plant.setName(plantResource.getName());
+		plant.setCostPerDay(plantResource.getCostPerDay());
+		plant.setDescription(plantResource.getDescription());
+		plant.persist();
+		return PlantResourceAssembler.create(plant);
 	}
 	
 	private int daysBetween(Date d1, Date d2) {
