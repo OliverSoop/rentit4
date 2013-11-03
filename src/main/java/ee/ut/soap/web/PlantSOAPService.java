@@ -11,11 +11,13 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import ee.ut.domain.POstatus;
 import ee.ut.model.Plant;
 import ee.ut.model.PurchaseOrder;
+import ee.ut.repository.PlantRepository;
 import ee.ut.soap.PlantResourceAssembler;
 import ee.ut.soap.PlantResourceList;
 import ee.ut.soap.PurchaseOrderResource;
@@ -24,8 +26,8 @@ import ee.ut.soap.PurchaseOrderResourceAssembler;
 @WebService
 public class PlantSOAPService extends SpringBeanAutowiringSupport {
 	
-//	@Autowired
-//	PlantRepository plantRepo;  
+	@Autowired
+	PlantRepository plantRepo;  
 	
     @Resource
     WebServiceContext wsContext;
@@ -40,7 +42,7 @@ public class PlantSOAPService extends SpringBeanAutowiringSupport {
 	@WebMethod
 	public PlantResourceList getAvailablePlants(@WebParam(targetNamespace = "http://web.soap.ut.ee/", name="startDate") Date startDate, 
 												@WebParam(targetNamespace = "http://web.soap.ut.ee/", name="endDate") Date endDate) {
-		List<Plant> plants = Plant.findAllPlants();//Currently returns all the plants, if a solution how to inject repository is found will change
+		List<Plant> plants = plantRepo.findAvailablePlants(startDate, endDate);//Currently returns all the plants, if a solution how to inject repository is found will change
 		if (plants != null) {
 			PlantResourceAssembler assembler = new PlantResourceAssembler();
 			return assembler.create(plants);

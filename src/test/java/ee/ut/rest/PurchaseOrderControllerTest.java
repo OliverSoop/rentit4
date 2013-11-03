@@ -22,7 +22,7 @@ import ee.ut.domain.POstatus;
 @MockStaticEntityMethods
 public class PurchaseOrderControllerTest {
 
-	private static String DOMAIN_URL = "http://localhost:8080/RentIT/";
+	private static String DOMAIN_URL = "http://rentit4.herokuapp.com/";
 
 	@Test
 	public void testSubmitPO() {
