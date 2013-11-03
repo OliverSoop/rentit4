@@ -26,10 +26,4 @@ public class PlantResourceAssembler {
 		return resources;
 
 	}
-
-	public PlantResource toResource(Object plantID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

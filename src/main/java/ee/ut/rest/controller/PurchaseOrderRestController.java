@@ -53,6 +53,20 @@ public class PurchaseOrderRestController {
 			PurchaseOrderResourceAssembler assembler = new PurchaseOrderResourceAssembler();
 			PurchaseOrderResource resource = assembler.toResource(po);
 			
+			Method getPO;
+			try {
+				getPO = PurchaseOrderRestController.class.getMethod(
+						"getPO", Long.class);
+				String getLink = linkTo(getPO, po.getId()).toUri()
+						.toString();
+				resource.add(new ExtendedLink(getLink, "self", "GET"));
+			} catch (NoSuchMethodException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 			URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
 					.pathSegment(po.getId().toString()).build().toUri();
