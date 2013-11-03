@@ -21,13 +21,12 @@ public class PurchaseOrderResourceAssembler extends
 		PurchaseOrderResource por = createResourceWithId(po.getId(), po);
 		por.setEndDate(po.getEndDate());
 		por.setStartDate(po.getStartDate());
-		por.setTotalCost(por.getTotalCost());
-		PlantResource plantResource;
-		if (por.getPlantID() != null) {
-			PlantResourceAssembler assembler = new PlantResourceAssembler();
-			plantResource = assembler.toResource(por.getPlantID());
-		//	por.setPlantID(plantResource);
-		}
+		por.setConstructionSite(po.getConstructionSite());
+		por.setExternalID(Long.toString(po.getId()));
+		por.setPlantID(po.getPlantID().getId());
+		por.setStatus(po.getStatus());
+		por.setSiteEngineer(po.getSiteEngineer());
+		por.setTotalCost(po.getTotalCost());
 		return por;
 	}
 }

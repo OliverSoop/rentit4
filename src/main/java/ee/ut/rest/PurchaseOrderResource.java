@@ -19,7 +19,7 @@ public class PurchaseOrderResource extends ResourceSupport {
     private Date endDate;
 	private String ConstructionSite;
 	private String SiteEngineer;
-	private Float totalCost;
+	private double totalCost;
     private Date POrecievedDate;
     private POstatus status;
     private Date returnDate;
@@ -75,11 +75,11 @@ public class PurchaseOrderResource extends ResourceSupport {
         this.SiteEngineer = SiteEngineer;
     }
 
-	public Float getTotalCost() {
+	public Double getTotalCost() {
         return this.totalCost;
     }
 
-	public void setTotalCost(Float totalCost) {
+	public void setTotalCost(Double totalCost) {
         this.totalCost = totalCost;
     }
 
