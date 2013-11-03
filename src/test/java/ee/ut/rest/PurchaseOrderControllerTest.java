@@ -22,7 +22,7 @@ import ee.ut.domain.POstatus;
 @MockStaticEntityMethods
 public class PurchaseOrderControllerTest {
 
-	private static String DOMAIN_URL = "http://rentit4.herokuapp.com/";
+	private static String DOMAIN_URL = "http://localhost:8080/RentIT/";
 
 	@Test
 	public void testSubmitPO() {
@@ -96,6 +96,7 @@ public class PurchaseOrderControllerTest {
 
 	private ClientResponse modifyPurchaseOrderResource(URI uri) {
 		Client client = Client.create();
+		
 		WebResource webResource = client.resource(uri.toString() + "/modify");
 
 		PurchaseOrderResource por = new PurchaseOrderResource();

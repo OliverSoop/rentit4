@@ -35,7 +35,7 @@ public class PurchaseOrderRestController {
 		HttpHeaders headers = new HttpHeaders();
 		ResponseEntity<PurchaseOrderResource> response;
 		if (plant == null) {
-			response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			response = new ResponseEntity<PurchaseOrderResource>(HttpStatus.NOT_FOUND);
 		} else {
 			po.setExternalID(por.getExternalID());
 			po.setPlantID(plant);
@@ -57,8 +57,8 @@ public class PurchaseOrderRestController {
 			URI location = ServletUriComponentsBuilder.fromCurrentRequestUri()
 					.pathSegment(po.getId().toString()).build().toUri();
 			headers.setLocation(location);
-			response = new ResponseEntity<>(
-					resource, HttpStatus.CREATED);
+			response = new ResponseEntity<PurchaseOrderResource>(
+					resource, headers, HttpStatus.CREATED);
 		}
 		return response;
 	}
