@@ -84,7 +84,7 @@ public class PurchaseOrderControllerTest {
 		por.setEndDate(new Date());
 		por.setConstructionSite("Liivi 2");
 		por.setSiteEngineer("Toivo");
-		por.setTotalCost(32.0F);
+		por.setTotalCost(32.0d);
 		por.setPOrecievedDate(new Date());
 		por.setStatus(POstatus.RECIEVED);
 		por.setReturnDate(new Date());
