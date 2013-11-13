@@ -3,15 +3,15 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_ee_ut_model_PurchaseOrder" object="${purchaseorder}" path="/purchaseorders" z="t8KVMC/jN/Le69YC88LVDfix4yw=">
-        <field:display field="externalID" id="s_ee_ut_model_PurchaseOrder_ExternalID" object="${purchaseorder}" z="cVGfIV+MJ9nH5Eb3FzNfwWrYxZY="/>
-        <field:display date="true" dateTimePattern="${purchaseOrder_startdate_date_format}" field="startDate" id="s_ee_ut_model_PurchaseOrder_StartDate" object="${purchaseorder}" z="/02wIAKOqt0D6B2rtDsVwmtMbgA="/>
-        <field:display date="true" dateTimePattern="${purchaseOrder_enddate_date_format}" field="endDate" id="s_ee_ut_model_PurchaseOrder_EndDate" object="${purchaseorder}" z="dTVD5Y4UW6jWbpGrfr/9djuDDVI="/>
-        <field:display field="constructionSite" id="s_ee_ut_model_PurchaseOrder_ConstructionSite" object="${purchaseorder}" z="BhXqDUoH1JnASIFrja/+Pgq4ErM="/>
         <field:display field="siteEngineer" id="s_ee_ut_model_PurchaseOrder_SiteEngineer" object="${purchaseorder}" z="7o3MCSIRMBTej1fNCII8ZYKwQXE="/>
-        <field:display field="totalCost" id="s_ee_ut_model_PurchaseOrder_TotalCost" object="${purchaseorder}" z="en05bVwUuaIyI2nhm+180lriOy0="/>
         <field:display field="plantID" id="s_ee_ut_model_PurchaseOrder_PlantID" object="${purchaseorder}" z="FXJ1ovUscri9GjOOlTk2MG2mEj8="/>
         <field:display date="true" dateTimePattern="${purchaseOrder_porecieveddate_date_format}" field="PORecievedDate" id="s_ee_ut_model_PurchaseOrder_PORecievedDate" object="${purchaseorder}" z="mZ21heV2bsfJ2Qc9bLhkO6lLZ5Y="/>
         <field:display field="status" id="s_ee_ut_model_PurchaseOrder_Status" object="${purchaseorder}" z="cQ3znc+Op3nzBBvurGoQby69FnM="/>
         <field:display date="true" dateTimePattern="${purchaseOrder_returndate_date_format}" field="returnDate" id="s_ee_ut_model_PurchaseOrder_ReturnDate" object="${purchaseorder}" z="6+eIN2gnKQsAs4ewWPq35ViXDnU="/>
+        <field:display field="externalId" id="s_ee_ut_model_PurchaseOrder_externalId" object="${purchaseorder}" z="eQ3o1dd3McfohT5WtUAmWS/aAgI="/>
+        <field:display date="true" dateTimePattern="${purchaseOrder_startdate_date_format}" field="startDate" id="s_ee_ut_model_PurchaseOrder_startDate" object="${purchaseorder}" z="0kUzKOjvtV6Ik0qKZUL0S+Y8wkM="/>
+        <field:display date="true" dateTimePattern="${purchaseOrder_enddate_date_format}" field="endDate" id="s_ee_ut_model_PurchaseOrder_endDate" object="${purchaseorder}" z="tYkJ0wXUWyHJdntmfBlUh8JXCz0="/>
+        <field:display field="constructionSite" id="s_ee_ut_model_PurchaseOrder_constructionSite" object="${purchaseorder}" z="x3wwbSEPeuSsGp+tNEpbLKFip/E="/>
+        <field:display field="totalCost" id="s_ee_ut_model_PurchaseOrder_totalCost" object="${purchaseorder}" z="wlWO4hhuwuUy++J/YdCpUVdXdcE="/>
     </page:show>
 </div>

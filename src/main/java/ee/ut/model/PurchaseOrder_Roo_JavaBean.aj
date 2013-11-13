@@ -10,36 +10,36 @@ import java.util.Date;
 
 privileged aspect PurchaseOrder_Roo_JavaBean {
     
-    public String PurchaseOrder.getExternalID() {
-        return this.ExternalID;
+    public String PurchaseOrder.getExternalId() {
+        return this.externalId;
     }
     
-    public void PurchaseOrder.setExternalID(String ExternalID) {
-        this.ExternalID = ExternalID;
+    public void PurchaseOrder.setExternalId(String externalId) {
+        this.externalId = externalId;
     }
     
     public Date PurchaseOrder.getStartDate() {
-        return this.StartDate;
+        return this.startDate;
     }
     
-    public void PurchaseOrder.setStartDate(Date StartDate) {
-        this.StartDate = StartDate;
+    public void PurchaseOrder.setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
     
     public Date PurchaseOrder.getEndDate() {
-        return this.EndDate;
+        return this.endDate;
     }
     
-    public void PurchaseOrder.setEndDate(Date EndDate) {
-        this.EndDate = EndDate;
+    public void PurchaseOrder.setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
     
     public String PurchaseOrder.getConstructionSite() {
-        return this.ConstructionSite;
+        return this.constructionSite;
     }
     
-    public void PurchaseOrder.setConstructionSite(String ConstructionSite) {
-        this.ConstructionSite = ConstructionSite;
+    public void PurchaseOrder.setConstructionSite(String constructionSite) {
+        this.constructionSite = constructionSite;
     }
     
     public String PurchaseOrder.getSiteEngineer() {
@@ -51,11 +51,11 @@ privileged aspect PurchaseOrder_Roo_JavaBean {
     }
     
     public double PurchaseOrder.getTotalCost() {
-        return this.TotalCost;
+        return this.totalCost;
     }
     
-    public void PurchaseOrder.setTotalCost(double TotalCost) {
-        this.TotalCost = TotalCost;
+    public void PurchaseOrder.setTotalCost(double totalCost) {
+        this.totalCost = totalCost;
     }
     
     public Date PurchaseOrder.getPORecievedDate() {

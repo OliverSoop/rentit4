@@ -37,7 +37,7 @@ public class PurchaseOrderRestController {
 		if (plant == null) {
 			response = new ResponseEntity<PurchaseOrderResource>(HttpStatus.NOT_FOUND);
 		} else {
-			po.setExternalID(por.getExternalID());
+			po.setExternalId(por.getExternalID());
 			po.setPlantID(plant);
 			po.setStartDate(por.getStartDate());
 			po.setEndDate(por.getEndDate());
@@ -87,7 +87,7 @@ public class PurchaseOrderRestController {
 		Plant plant = Plant.findPlant(por.getPlantID());
 
 		if (po != null && plant != null) {
-			po.setExternalID(por.getExternalID());
+			po.setExternalId(por.getExternalID());
 			po.setPlantID(plant);
 			po.setStartDate(por.getStartDate());
 			po.setEndDate(por.getEndDate());

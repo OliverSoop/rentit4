@@ -24,19 +24,19 @@ xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
 				<c:forEach var="po" items="${purchaseorders}">
 					<tr>
 						<td>
-							${po.getExternalID()}
+							${po.externalId}
 						</td>
 						<td>
-							<fmt:formatDate value="${po.getStartDate()}" />
+							<fmt:formatDate value="${po.startDate}" />
 						</td>
 						<td>
-							<fmt:formatDate value="${po.getEndDate()}" />
+							<fmt:formatDate value="${po.endDate}" />
 						</td>
 						<td>
-							${po.getTotalCost()}
+							${po.totalCost}
 						</td>
 						<td>
-						<spring:url value="/purchaseorders/${po.getId()}" var="show_form_url" />
+						<spring:url value="/purchaseorders/${po.id}" var="show_form_url" />
 			            <spring:url value="/resources/images/show.png" var="show_image_url" />
 			            <spring:message arguments="${typeName}" code="entity_show" var="show_label" htmlEscape="false" />
 			            <a href="${show_form_url}" alt="Show" title="Show">
@@ -44,7 +44,7 @@ xmlns:c="http://java.sun.com/jsp/jstl/core" version="2.0">
 			            </a>
 						</td>
 						<form:form method="POST" action="approval" modelAttribute="purchaseOrder" >
-							<form:hidden path="selectedId" value="${po.getId()}"/>
+							<form:hidden path="selectedId" value="${po.id}"/>
 							<td>
 								<input type = "submit" value = "ACCEPT" name="accept" />
 							</td>

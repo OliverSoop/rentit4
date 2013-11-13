@@ -12,7 +12,7 @@ import ee.ut.model.Plant;
 @RooJpaRepository(domainType = Plant.class)
 public interface PlantRepository {
 	
-	@Query("SELECT p FROM Plant AS p WHERE NOT EXISTS(SELECT po FROM PurchaseOrder AS po WHERE p.id = po.PlantID AND :startDate BETWEEN po.StartDate AND po.EndDate AND :endDate BETWEEN po.StartDate AND po.EndDate)")
+	@Query("SELECT p FROM Plant AS p WHERE NOT EXISTS(SELECT po FROM PurchaseOrder AS po WHERE p.id = po.PlantID AND :startDate BETWEEN po.startDate AND po.endDate AND :endDate BETWEEN po.startDate AND po.endDate)")
 	@Transactional(readOnly=true)
 	List<Plant> findAvailablePlants(@Param("startDate") Date startDate,
 									  @Param("endDate") Date endDate);

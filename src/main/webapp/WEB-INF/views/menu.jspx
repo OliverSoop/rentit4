@@ -12,7 +12,7 @@
             <menu:item id="i_purchaseorder_list" messageCode="global_menu_list" url="/purchaseorders?page=1&amp;size=${empty param.size ? 10 : param.size}" z="DHer7WK9MJB49FXJX9B6Kds2DxY="/>
         </menu:category>
         <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
-            <menu:item id="i_controller__purchaseorders_approvelistindex_id" messageCode="global_generic" url="/purchaseorders/approvelist/list" z="RZdt+fOO5GW5tOv3zjl2TBsiL+M="/>
+            <menu:item id="i_controller__purchaseorders_approvelistindex_id" messageCode="global_generic" url="/purchaseorders/approvelist/list" z="user-managed"/>
         </menu:category>
     </menu:menu>
 </div>

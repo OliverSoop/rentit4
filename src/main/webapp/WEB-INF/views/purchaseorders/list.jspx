@@ -4,12 +4,12 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_ee_ut_model_PurchaseOrder" items="${purchaseorders}" z="HPkHn/raeiPxTnitq2g/1bTwioo=">
         <table:table data="${purchaseorders}" id="l_ee_ut_model_PurchaseOrder" path="/purchaseorders" z="W2Bk6T7iveC86wpCXp/yQ0u0X3Q=">
-            <table:column id="c_ee_ut_model_PurchaseOrder_ExternalID" property="externalID" z="eM4sx347cFRvf87RRB4YTPu3E2Y="/>
-            <table:column date="true" dateTimePattern="${purchaseOrder_startdate_date_format}" id="c_ee_ut_model_PurchaseOrder_StartDate" property="startDate" z="tbJLMcTiGJsV0rgEQpIk/m/nfdg="/>
-            <table:column date="true" dateTimePattern="${purchaseOrder_enddate_date_format}" id="c_ee_ut_model_PurchaseOrder_EndDate" property="endDate" z="7r4AlHnvx71Yg8ZA5bQ+Yh4ceN0="/>
-            <table:column id="c_ee_ut_model_PurchaseOrder_ConstructionSite" property="constructionSite" z="U0e02eCnzYNEn1cuBQhJQTQmGKg="/>
             <table:column id="c_ee_ut_model_PurchaseOrder_SiteEngineer" property="siteEngineer" z="hPV2/Nc2iZ4AmRpHT0wYk9TBvkc="/>
-            <table:column id="c_ee_ut_model_PurchaseOrder_TotalCost" property="totalCost" z="QmPIp8ZnXNVuyc+hbmjclLOUqbM="/>
+            <table:column id="c_ee_ut_model_PurchaseOrder_externalId" property="externalId" z="wU50LhTPjX/BvSEkdF7ORbVdngs="/>
+            <table:column date="true" dateTimePattern="${purchaseOrder_startdate_date_format}" id="c_ee_ut_model_PurchaseOrder_startDate" property="startDate" z="m7YAYoBQGr+x1f4oVCNeD12gNN4="/>
+            <table:column date="true" dateTimePattern="${purchaseOrder_enddate_date_format}" id="c_ee_ut_model_PurchaseOrder_endDate" property="endDate" z="4MDM5yDWA62AZSy4xk9ueeSGX30="/>
+            <table:column id="c_ee_ut_model_PurchaseOrder_constructionSite" property="constructionSite" z="NvXSvJZiZjng3k4BegY+5l8BiKQ="/>
+            <table:column id="c_ee_ut_model_PurchaseOrder_totalCost" property="totalCost" z="uwQcMO7cuYSGz8xE97osH9+UnYo="/>
         </table:table>
     </page:list>
 </div>
