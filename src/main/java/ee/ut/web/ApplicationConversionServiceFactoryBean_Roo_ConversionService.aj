@@ -6,6 +6,7 @@ package ee.ut.web;
 import ee.ut.model.Plant;
 import ee.ut.model.PurchaseOrder;
 import ee.ut.repository.PlantRepository;
+import ee.ut.repository.PurchaseOrderRepository;
 import ee.ut.web.ApplicationConversionServiceFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -18,6 +19,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     
     @Autowired
     PlantRepository ApplicationConversionServiceFactoryBean.plantRepository;
+    
+    @Autowired
+    PurchaseOrderRepository ApplicationConversionServiceFactoryBean.purchaseOrderRepository;
     
     public Converter<Plant, String> ApplicationConversionServiceFactoryBean.getPlantToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<ee.ut.model.Plant, java.lang.String>() {
@@ -54,7 +58,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Long, PurchaseOrder> ApplicationConversionServiceFactoryBean.getIdToPurchaseOrderConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, ee.ut.model.PurchaseOrder>() {
             public ee.ut.model.PurchaseOrder convert(java.lang.Long id) {
-                return PurchaseOrder.findPurchaseOrder(id);
+                return purchaseOrderRepository.findOne(id);
             }
         };
     }

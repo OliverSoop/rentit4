@@ -144,3 +144,9 @@ perform tests
 perform tests
 perform tests
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-03 13:25:20
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-11 12:02:19
+hint
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-11-11 13:25:00
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-13 19:13:51
+web mvc controller --class ~.web.POListController --preferredMapping /purchaseorders/approvelist
+repository jpa --interface  ~.repository.PurchaseOrderRepository --entity ~.model.PurchaseOrder

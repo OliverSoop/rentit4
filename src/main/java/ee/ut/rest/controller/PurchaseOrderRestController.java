@@ -45,7 +45,7 @@ public class PurchaseOrderRestController {
 			po.setSiteEngineer(por.getSiteEngineer());
 			po.setTotalCost(por.getTotalCost());
 			po.setPORecievedDate(por.getPOrecievedDate());
-			po.setStatus(POstatus.RECIEVED);
+			po.setStatus(POstatus.PENDING_CONFIRMATION);
 			po.setReturnDate(por.getReturnDate());
 			po.persist();
 			

@@ -6,6 +6,7 @@ package ee.ut.web;
 import ee.ut.domain.POstatus;
 import ee.ut.model.PurchaseOrder;
 import ee.ut.repository.PlantRepository;
+import ee.ut.repository.PurchaseOrderRepository;
 import ee.ut.web.PurchaseOrderController;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
@@ -26,6 +27,9 @@ import org.springframework.web.util.WebUtils;
 privileged aspect PurchaseOrderController_Roo_Controller {
     
     @Autowired
+    PurchaseOrderRepository PurchaseOrderController.purchaseOrderRepository;
+    
+    @Autowired
     PlantRepository PurchaseOrderController.plantRepository;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
@@ -35,7 +39,7 @@ privileged aspect PurchaseOrderController_Roo_Controller {
             return "purchaseorders/create";
         }
         uiModel.asMap().clear();
-        purchaseOrder.persist();
+        purchaseOrderRepository.save(purchaseOrder);
         return "redirect:/purchaseorders/" + encodeUrlPathSegment(purchaseOrder.getId().toString(), httpServletRequest);
     }
     
@@ -48,7 +52,7 @@ privileged aspect PurchaseOrderController_Roo_Controller {
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String PurchaseOrderController.show(@PathVariable("id") Long id, Model uiModel) {
         addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("purchaseorder", PurchaseOrder.findPurchaseOrder(id));
+        uiModel.addAttribute("purchaseorder", purchaseOrderRepository.findOne(id));
         uiModel.addAttribute("itemId", id);
         return "purchaseorders/show";
     }
@@ -58,11 +62,11 @@ privileged aspect PurchaseOrderController_Roo_Controller {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("purchaseorders", PurchaseOrder.findPurchaseOrderEntries(firstResult, sizeNo));
-            float nrOfPages = (float) PurchaseOrder.countPurchaseOrders() / sizeNo;
+            uiModel.addAttribute("purchaseorders", purchaseOrderRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / sizeNo, sizeNo)).getContent());
+            float nrOfPages = (float) purchaseOrderRepository.count() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("purchaseorders", PurchaseOrder.findAllPurchaseOrders());
+            uiModel.addAttribute("purchaseorders", purchaseOrderRepository.findAll());
         }
         addDateTimeFormatPatterns(uiModel);
         return "purchaseorders/list";
@@ -75,20 +79,20 @@ privileged aspect PurchaseOrderController_Roo_Controller {
             return "purchaseorders/update";
         }
         uiModel.asMap().clear();
-        purchaseOrder.merge();
+        purchaseOrderRepository.save(purchaseOrder);
         return "redirect:/purchaseorders/" + encodeUrlPathSegment(purchaseOrder.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String PurchaseOrderController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, PurchaseOrder.findPurchaseOrder(id));
+        populateEditForm(uiModel, purchaseOrderRepository.findOne(id));
         return "purchaseorders/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String PurchaseOrderController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        PurchaseOrder purchaseOrder = PurchaseOrder.findPurchaseOrder(id);
-        purchaseOrder.remove();
+        PurchaseOrder purchaseOrder = purchaseOrderRepository.findOne(id);
+        purchaseOrderRepository.delete(purchaseOrder);
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());

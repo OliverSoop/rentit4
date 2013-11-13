@@ -1,14 +1,18 @@
 package ee.ut.model;
+import java.util.Date;
+
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
-import javax.persistence.Enumerated;
-import java.util.Date;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import org.springframework.format.annotation.DateTimeFormat;
+
 import ee.ut.domain.POstatus;
-import javax.persistence.ManyToOne;
 
 @RooJavaBean
 @RooToString
@@ -51,7 +55,7 @@ public class PurchaseOrder {
 
     /**
      */
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private POstatus Status;
 
     /**
