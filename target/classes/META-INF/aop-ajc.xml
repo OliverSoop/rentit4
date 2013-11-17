@@ -8,6 +8,7 @@
 <aspect name="ee.ut.model.Plant_Roo_Configurable"/>
 <aspect name="ee.ut.web.ApplicationConversionServiceFactoryBean_Roo_ConversionService"/>
 <aspect name="ee.ut.soap.PlantResource_Roo_JavaBean"/>
+<aspect name="ee.ut.web.emp.PlantEmpController_Roo_Controller"/>
 <aspect name="ee.ut.security.Assignments_Roo_Configurable"/>
 <aspect name="ee.ut.security.Authorities_Roo_Jpa_Entity"/>
 <aspect name="ee.ut.security.UsersController_Roo_Controller"/>

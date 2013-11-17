@@ -167,3 +167,12 @@ focus --class ~.security.Authorities
 web mvc scaffold --class ~.security.AuthoritiesController --path /security/authorities
 focus --class ~.security.Assignments
 web mvc scaffold --class ~.security.AssignmentsController --path /security/assignments
+focus --class ~.model.Plant
+web mvc scaffold --class ~.web.emp.PlantEmpController --path /emp/plant --backingType ~.model.Plant --disallowedOperations create,delete,update
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests
+perform tests

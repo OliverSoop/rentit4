@@ -15,6 +15,7 @@ import org.springframework.mock.staticmock.MockStaticEntityMethods;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 
 import ee.ut.domain.POstatus;
 
@@ -56,6 +57,7 @@ public class PurchaseOrderControllerTest {
 		ClientResponse response = createPurchaseOrderResource();
 		URI uri = response.getLocation();
 		Client client = Client.create();
+		client.addFilter(new HTTPBasicAuthFilter("customer", "customer"));
 		WebResource webResource = client.resource(uri.toString() + "/cancel");
 		ClientResponse cancelResponse = webResource
 				.post(ClientResponse.class);
@@ -66,6 +68,7 @@ public class PurchaseOrderControllerTest {
 
 	private ClientResponse getPurchaseOrderResource(URI location) {
 		Client client = Client.create();
+		client.addFilter(new HTTPBasicAuthFilter("customer", "customer"));
 		WebResource webResource = client.resource(location);
 		return webResource.type(MediaType.APPLICATION_XML)
 				.accept(MediaType.APPLICATION_XML).get(ClientResponse.class);
@@ -73,6 +76,7 @@ public class PurchaseOrderControllerTest {
 
 	private ClientResponse createPurchaseOrderResource() {
 		Client client = Client.create();
+		client.addFilter(new HTTPBasicAuthFilter("customer", "customer"));
 		WebResource webResource = client.resource(DOMAIN_URL
 				+ "rest/purchaseorders");
 
@@ -96,7 +100,7 @@ public class PurchaseOrderControllerTest {
 
 	private ClientResponse modifyPurchaseOrderResource(URI uri) {
 		Client client = Client.create();
-		
+		client.addFilter(new HTTPBasicAuthFilter("customer", "customer"));
 		WebResource webResource = client.resource(uri.toString() + "/modify");
 
 		PurchaseOrderResource por = new PurchaseOrderResource();
@@ -119,6 +123,7 @@ public class PurchaseOrderControllerTest {
 	
     private Long createPlantResource() {
     	Client client = Client.create();
+    	client.addFilter(new HTTPBasicAuthFilter("employee", "employee"));
     	WebResource webResource = client.resource(DOMAIN_URL + "rest/plant");
     	
 		PlantResource plant = new PlantResource();
