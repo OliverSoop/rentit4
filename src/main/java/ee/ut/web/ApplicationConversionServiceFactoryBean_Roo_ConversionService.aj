@@ -7,6 +7,9 @@ import ee.ut.model.Plant;
 import ee.ut.model.PurchaseOrder;
 import ee.ut.repository.PlantRepository;
 import ee.ut.repository.PurchaseOrderRepository;
+import ee.ut.security.Assignments;
+import ee.ut.security.Authorities;
+import ee.ut.security.Users;
 import ee.ut.web.ApplicationConversionServiceFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -71,6 +74,78 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
+    public Converter<Assignments, String> ApplicationConversionServiceFactoryBean.getAssignmentsToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<ee.ut.security.Assignments, java.lang.String>() {
+            public String convert(Assignments assignments) {
+                return "(no displayable fields)";
+            }
+        };
+    }
+    
+    public Converter<Long, Assignments> ApplicationConversionServiceFactoryBean.getIdToAssignmentsConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, ee.ut.security.Assignments>() {
+            public ee.ut.security.Assignments convert(java.lang.Long id) {
+                return Assignments.findAssignments(id);
+            }
+        };
+    }
+    
+    public Converter<String, Assignments> ApplicationConversionServiceFactoryBean.getStringToAssignmentsConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, ee.ut.security.Assignments>() {
+            public ee.ut.security.Assignments convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), Assignments.class);
+            }
+        };
+    }
+    
+    public Converter<Authorities, String> ApplicationConversionServiceFactoryBean.getAuthoritiesToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<ee.ut.security.Authorities, java.lang.String>() {
+            public String convert(Authorities authorities) {
+                return new StringBuilder().append(authorities.getAuthority()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, Authorities> ApplicationConversionServiceFactoryBean.getIdToAuthoritiesConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, ee.ut.security.Authorities>() {
+            public ee.ut.security.Authorities convert(java.lang.Long id) {
+                return Authorities.findAuthorities(id);
+            }
+        };
+    }
+    
+    public Converter<String, Authorities> ApplicationConversionServiceFactoryBean.getStringToAuthoritiesConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, ee.ut.security.Authorities>() {
+            public ee.ut.security.Authorities convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), Authorities.class);
+            }
+        };
+    }
+    
+    public Converter<Users, String> ApplicationConversionServiceFactoryBean.getUsersToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<ee.ut.security.Users, java.lang.String>() {
+            public String convert(Users users) {
+                return new StringBuilder().append(users.getUsername()).append(' ').append(users.getPassword()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, Users> ApplicationConversionServiceFactoryBean.getIdToUsersConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, ee.ut.security.Users>() {
+            public ee.ut.security.Users convert(java.lang.Long id) {
+                return Users.findUsers(id);
+            }
+        };
+    }
+    
+    public Converter<String, Users> ApplicationConversionServiceFactoryBean.getStringToUsersConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, ee.ut.security.Users>() {
+            public ee.ut.security.Users convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), Users.class);
+            }
+        };
+    }
+    
     public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
         registry.addConverter(getPlantToStringConverter());
         registry.addConverter(getIdToPlantConverter());
@@ -78,6 +153,15 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getPurchaseOrderToStringConverter());
         registry.addConverter(getIdToPurchaseOrderConverter());
         registry.addConverter(getStringToPurchaseOrderConverter());
+        registry.addConverter(getAssignmentsToStringConverter());
+        registry.addConverter(getIdToAssignmentsConverter());
+        registry.addConverter(getStringToAssignmentsConverter());
+        registry.addConverter(getAuthoritiesToStringConverter());
+        registry.addConverter(getIdToAuthoritiesConverter());
+        registry.addConverter(getStringToAuthoritiesConverter());
+        registry.addConverter(getUsersToStringConverter());
+        registry.addConverter(getIdToUsersConverter());
+        registry.addConverter(getStringToUsersConverter());
     }
     
     public void ApplicationConversionServiceFactoryBean.afterPropertiesSet() {

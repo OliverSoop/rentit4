@@ -2,25 +2,43 @@
 <aspects>
 <aspect name="ee.ut.soap.PlantResourceList_Roo_JavaBean"/>
 <aspect name="ee.ut.model.PurchaseOrder_Roo_ToString"/>
-<aspect name="ee.ut.soap.PurchaseOrderResource_Roo_JavaBean"/>
-<aspect name="ee.ut.beans.PurchaseOrderBean_Roo_JavaBean"/>
-<aspect name="ee.ut.model.PurchaseOrder_Roo_Jpa_Entity"/>
+<aspect name="ee.ut.security.AuthoritiesController_Roo_Controller"/>
+<aspect name="ee.ut.security.Assignments_Roo_Jpa_ActiveRecord"/>
 <aspect name="ee.ut.repository.PlantRepository_Roo_Jpa_Repository"/>
 <aspect name="ee.ut.model.Plant_Roo_Configurable"/>
-<aspect name="ee.ut.model.PurchaseOrder_Roo_JavaBean"/>
 <aspect name="ee.ut.web.ApplicationConversionServiceFactoryBean_Roo_ConversionService"/>
-<aspect name="ee.ut.model.Plant_Roo_Jpa_ActiveRecord"/>
 <aspect name="ee.ut.soap.PlantResource_Roo_JavaBean"/>
+<aspect name="ee.ut.security.Assignments_Roo_Configurable"/>
+<aspect name="ee.ut.security.Authorities_Roo_Jpa_Entity"/>
+<aspect name="ee.ut.security.UsersController_Roo_Controller"/>
+<aspect name="ee.ut.security.Users_Roo_JavaBean"/>
+<aspect name="ee.ut.rest.PlantResourceList_Roo_JavaBean"/>
+<aspect name="ee.ut.beans.PurchaseOrderBean_Roo_JavaBean"/>
+<aspect name="ee.ut.soap.PurchaseOrderResource_Roo_JavaBean"/>
+<aspect name="ee.ut.security.Authorities_Roo_ToString"/>
+<aspect name="ee.ut.security.Authorities_Roo_Configurable"/>
+<aspect name="ee.ut.model.PurchaseOrder_Roo_Jpa_Entity"/>
+<aspect name="ee.ut.security.Users_Roo_Jpa_Entity"/>
+<aspect name="ee.ut.model.PurchaseOrder_Roo_JavaBean"/>
+<aspect name="ee.ut.model.Plant_Roo_Jpa_ActiveRecord"/>
 <aspect name="ee.ut.model.PurchaseOrder_Roo_Jpa_ActiveRecord"/>
+<aspect name="ee.ut.security.AssignmentsController_Roo_Controller"/>
 <aspect name="ee.ut.repository.PurchaseOrderRepository_Roo_Jpa_Repository"/>
 <aspect name="ee.ut.web.PurchaseOrderController_Roo_Controller"/>
+<aspect name="ee.ut.security.Users_Roo_Configurable"/>
+<aspect name="ee.ut.security.Authorities_Roo_JavaBean"/>
+<aspect name="ee.ut.security.Assignments_Roo_Jpa_Entity"/>
 <aspect name="ee.ut.rest.PlantResource_Roo_JavaBean"/>
+<aspect name="ee.ut.security.Users_Roo_ToString"/>
 <aspect name="ee.ut.model.Plant_Roo_JavaBean"/>
 <aspect name="ee.ut.model.Plant_Roo_ToString"/>
 <aspect name="ee.ut.web.PlantController_Roo_Controller"/>
+<aspect name="ee.ut.security.Assignments_Roo_ToString"/>
 <aspect name="ee.ut.model.PurchaseOrder_Roo_Configurable"/>
+<aspect name="ee.ut.security.Assignments_Roo_JavaBean"/>
+<aspect name="ee.ut.security.Authorities_Roo_Jpa_ActiveRecord"/>
 <aspect name="ee.ut.model.Plant_Roo_Jpa_Entity"/>
-<aspect name="ee.ut.rest.PlantResourceList_Roo_JavaBean"/>
+<aspect name="ee.ut.security.Users_Roo_Jpa_ActiveRecord"/>
 </aspects>
 </aspectj>
 

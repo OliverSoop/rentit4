@@ -150,3 +150,20 @@ hint
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-13 19:13:51
 web mvc controller --class ~.web.POListController --preferredMapping /purchaseorders/approvelist
 repository jpa --interface  ~.repository.PurchaseOrderRepository --entity ~.model.PurchaseOrder
+// Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-11-17 14:02:15
+security setup
+entity jpa --class ~.security.Users
+field string --fieldName username
+field string --fieldName password
+field boolean --fieldName enabled
+entity jpa --class ~.security.Authorities
+field string --fieldName authority
+entity jpa --class ~.security.Assignments
+field reference --fieldName userRentIt --type ~.security.Users 
+field reference --fieldName authority --type ~.security.Authorities
+focus --class ~.security.Users
+web mvc scaffold --class ~.security.UsersController --path /security/users
+focus --class ~.security.Authorities
+web mvc scaffold --class ~.security.AuthoritiesController --path /security/authorities
+focus --class ~.security.Assignments
+web mvc scaffold --class ~.security.AssignmentsController --path /security/assignments
