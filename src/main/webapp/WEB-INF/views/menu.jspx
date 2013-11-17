@@ -7,13 +7,15 @@
             <menu:item id="i_plant_new" messageCode="global_menu_new" url="/plants?form" z="xo+pvLk6blhjqcOUBTU4TvBovxs="/>
             <menu:item id="i_plant_list" messageCode="global_menu_list" url="/plants?page=1&amp;size=${empty param.size ? 10 : param.size}" z="nVO5Nlhqho9gPDPyH2U9yITgeHo="/>
         </menu:category>
-        <menu:category id="c_purchaseorder" z="LdgN+Z53I4kIOyJx+mc8CFmbIuU=">
-            <menu:item id="i_purchaseorder_new" messageCode="global_menu_new" url="/purchaseorders?form" z="I6gpOtV3+H+iGlPgmv55Zhufszk="/>
-            <menu:item id="i_purchaseorder_list" messageCode="global_menu_list" url="/purchaseorders?page=1&amp;size=${empty param.size ? 10 : param.size}" z="DHer7WK9MJB49FXJX9B6Kds2DxY="/>
-        </menu:category>
-        <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
-            <menu:item id="i_controller__purchaseorders_approvelistindex_id" messageCode="global_generic" url="/purchaseorders/approvelist/list" z="user-managed"/>
-        </menu:category>
+        <sec:authorize ifAllGranted="ROLE_EMPLOYEE">
+	        <menu:category id="c_purchaseorder" z="LdgN+Z53I4kIOyJx+mc8CFmbIuU=">
+	            <menu:item id="i_purchaseorder_new" messageCode="global_menu_new" url="/purchaseorders?form" z="I6gpOtV3+H+iGlPgmv55Zhufszk="/>
+	            <menu:item id="i_purchaseorder_list" messageCode="global_menu_list" url="/purchaseorders?page=1&amp;size=${empty param.size ? 10 : param.size}" z="DHer7WK9MJB49FXJX9B6Kds2DxY="/>
+	        </menu:category>
+	        <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
+	            <menu:item id="i_controller__purchaseorders_approvelistindex_id" messageCode="global_generic" url="/purchaseorders/approvelist/list" z="user-managed"/>
+	        </menu:category>
+        </sec:authorize>
         <sec:authorize ifAllGranted="ROLE_ADMIN">
 	        <menu:category id="c_users" z="Ysam8XVhG5uotPoUGGxkia1RE/s=">
 	            <menu:item id="i_users_new" messageCode="global_menu_new" url="/security/users?form" z="NmfbRpM+6nqMtYF9mKD3ToCNCys="/>

@@ -9,6 +9,7 @@
         <form-login login-processing-url="/resources/j_spring_security_check" login-page="/login" authentication-failure-url="/login?login_error=t" />
         <logout logout-url="/resources/j_spring_security_logout" />
         <!-- Configure these elements to secure URIs in your application -->
+        <intercept-url pattern="/PlantSOAPService**" access="permitAll" />
         <intercept-url pattern="/choices/**" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/member/**" access="isAuthenticated()" />
         <intercept-url pattern="/resources/**" access="permitAll" />
@@ -22,10 +23,12 @@
         	<jdbc-user-service data-source-ref="dataSource" 
         		users-by-username-query="SELECT username, password, enabled FROM users WHERE username = ?;"
 				authorities-by-username-query="SELECT p.username, a.authority FROM users p, authorities a, assignments ra
-								WHERE p.id = ra.user_rent_it AND a.id =ra.authority AND p.username = ?;" />
+								WHERE p.id = ra.user_rent_it AND a.id = ra.authority AND p.username = ?;" />
             <user-service>
                 <user name="admin" password="admin" authorities="ROLE_ADMIN" />
                 <user name="user" password="user" authorities="ROLE_USER" />
+                <user name="customer" password="customer" authorities="ROLE_CUSTOMER" />
+                <user name="employee" password="employee" authorities="ROLE_EMPLOYEE" />
             </user-service>
         </authentication-provider>
     </authentication-manager>
