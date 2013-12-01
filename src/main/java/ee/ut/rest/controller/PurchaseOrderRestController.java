@@ -4,17 +4,21 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 import java.lang.reflect.Method;
 import java.net.URI;
+import java.util.Date;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import ee.ut.domain.ConstructionSiteNotSetException;
+import ee.ut.domain.InvalidHirePeriodException;
 import ee.ut.domain.POstatus;
 import ee.ut.model.Plant;
 import ee.ut.model.PurchaseOrder;
@@ -27,7 +31,7 @@ import ee.ut.util.ExtendedLink;
 public class PurchaseOrderRestController {
 
 	@RequestMapping(method = RequestMethod.POST, value = "")
-	public ResponseEntity<PurchaseOrderResource> createPO(@RequestBody PurchaseOrderResource por) {
+	public ResponseEntity<PurchaseOrderResource> createPO(@RequestBody PurchaseOrderResource por) throws InvalidHirePeriodException, ConstructionSiteNotSetException {
 
 		PurchaseOrder po = new PurchaseOrder();
 		Plant plant = Plant.findPlant(por.getPlantID());
@@ -37,18 +41,26 @@ public class PurchaseOrderRestController {
 		if (plant == null) {
 			response = new ResponseEntity<PurchaseOrderResource>(HttpStatus.NOT_FOUND);
 		} else {
+			
+			//Validate
+			if (por.getStartDate() == null || por.getEndDate() == null) {
+				throw new InvalidHirePeriodException("The start date or end date for the plant hire period is not set");
+			} else if (por.getConstructionSite() == null || por.getConstructionSite().length() == 0) {
+				throw new ConstructionSiteNotSetException("Construction site not set");
+			}
+			
 			po.setExternalId(por.getExternalID());
 			po.setPlantID(plant);
 			po.setStartDate(por.getStartDate());
 			po.setEndDate(por.getEndDate());
 			po.setConstructionSite(por.getConstructionSite());
 			po.setSiteEngineer(por.getSiteEngineer());
-			po.setTotalCost(por.getTotalCost());
-			po.setPORecievedDate(por.getPOrecievedDate());
+			//Calculate cost
+			po.setTotalCost(plant.getCostPerDay() * daysBetween(po.getStartDate(), po.getEndDate()));
+			po.setPORecievedDate(new Date());
 			po.setStatus(POstatus.PENDING_CONFIRMATION);
 			po.setReturnDate(por.getReturnDate());
 			po.persist();
-			
 			
 			PurchaseOrderResourceAssembler assembler = new PurchaseOrderResourceAssembler();
 			PurchaseOrderResource resource = assembler.toResource(po);
@@ -115,9 +127,13 @@ public class PurchaseOrderRestController {
 		ResponseEntity<Void> response;
 
 		if (po != null) {
-			po.setStatus(POstatus.CANCELLATION_REQUESTED);
-			po.persist();
-			response = new ResponseEntity<Void>(HttpStatus.OK);
+			if (po.getStartDate().after(new Date())) {
+				po.setStatus(POstatus.CANCELLATION_REQUESTED);
+				po.persist();
+				response = new ResponseEntity<Void>(HttpStatus.OK);
+			} else {
+				response = new ResponseEntity<Void>(HttpStatus.METHOD_NOT_ALLOWED);
+			}
 		} else {
 			response = new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
@@ -245,4 +261,15 @@ public class PurchaseOrderRestController {
 			response = new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
 		return response;
 	}
+	
+	//Error handling
+	@ExceptionHandler({InvalidHirePeriodException.class, ConstructionSiteNotSetException.class})
+	public ResponseEntity<String> handleBadRequest(Exception ex) {
+		return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+	}
+	
+	//Calculate how many days between two dates
+    public int daysBetween(Date d1, Date d2){
+        return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+    }
 }

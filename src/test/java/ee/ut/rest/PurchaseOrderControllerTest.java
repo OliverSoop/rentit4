@@ -3,6 +3,7 @@ package ee.ut.rest;
 import static org.junit.Assert.assertTrue;
 
 import java.net.URI;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.ws.rs.core.MediaType;
@@ -84,8 +85,11 @@ public class PurchaseOrderControllerTest {
 
 		por.setExternalID("1");
 		por.setPlantID(createPlantResource());
-		por.setStartDate(new Date());
-		por.setEndDate(new Date());
+		Calendar date = Calendar.getInstance();
+		date.add(Calendar.DAY_OF_MONTH, 5);
+		por.setStartDate(date.getTime());
+		date.add(Calendar.DAY_OF_MONTH, 5);
+		por.setEndDate(date.getTime());
 		por.setConstructionSite("Liivi 2");
 		por.setSiteEngineer("Toivo");
 		por.setTotalCost(32.0d);

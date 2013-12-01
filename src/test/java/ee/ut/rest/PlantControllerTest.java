@@ -20,7 +20,7 @@ import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 @MockStaticEntityMethods
 public class PlantControllerTest {
 	
-	private static String DOMAIN_URL = "http://rentit4.herokuapp.com/";
+	private static String DOMAIN_URL = "http://localhost:8080/RentIT/";
 	
     @Test
     public void testGetPlantPrice() {
