@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_ee_ut_model_Invoice" object="${invoice}" path="/invoices" z="ZocGySP/oKwwcK/04O+11EpxV1I=">
+        <field:display field="total" id="s_ee_ut_model_Invoice_total" object="${invoice}" z="5cCEKHearAaAuJN3OAqYURsLqCo="/>
+        <field:display field="purchaseOrderHRef" id="s_ee_ut_model_Invoice_purchaseOrderHRef" object="${invoice}" z="W9L+EAs9XSppb3fzQCZw6r9flxI="/>
+        <field:display field="returnEmail" id="s_ee_ut_model_Invoice_returnEmail" object="${invoice}" z="iSbYKc67jcCV5g4b4YGTm8OEND0="/>
+        <field:display field="status" id="s_ee_ut_model_Invoice_status" object="${invoice}" z="hyCerxifTHXbIWBNJJD6NvtgAEg="/>
+    </page:show>
+</div>

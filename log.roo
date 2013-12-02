@@ -191,3 +191,8 @@ field string --fieldName email
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-02 19:22:38
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log closed at 2013-12-02 20:09:57
 // Spring Roo 1.2.4.RELEASE [rev 75337cf] log opened at 2013-12-02 20:32:44
+help
+hint
+help
+web mvc scaffold --class ~.web.InvoiceController --backingType ~.model.Invoice.class
+web mvc scaffold --class ~.web.InvoiceController --backingType ~.Invoice.class
