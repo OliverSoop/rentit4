@@ -6,5 +6,9 @@ package ee.ut.domain;
  */
 public enum InvoiceStatus {
 
+<<<<<<< HEAD
+	APPROVED, DISAPPROVED
+=======
 	UNPAID, PAID
+>>>>>>> newbranch
 }

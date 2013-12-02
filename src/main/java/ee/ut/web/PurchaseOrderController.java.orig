@@ -1,16 +1,32 @@
 package ee.ut.web;
 
+<<<<<<< HEAD
+import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.integration.annotation.ServiceActivator;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+=======
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+>>>>>>> newbranch
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+<<<<<<< HEAD
+
+import ee.ut.domain.POstatus;
+=======
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.FileSystemResource;
@@ -24,6 +40,7 @@ import WriteXMLFile.WriteXMLFile;
 import ee.ut.domain.InvoiceStatus;
 import ee.ut.domain.POstatus;
 import ee.ut.model.Invoice;
+>>>>>>> newbranch
 import ee.ut.model.PurchaseOrder;
 
 @RequestMapping("/purchaseorders")
@@ -42,6 +59,9 @@ public class PurchaseOrderController {
         purchaseOrderRepository.save(purchaseOrder);
         
         if(purchaseOrder.getStatus() == POstatus.RETURNED){
+<<<<<<< HEAD
+        	process(purchaseOrder);
+=======
         	
         	WriteXMLFile.write(purchaseOrder.getExternalId(), ""+((int)purchaseOrder.getTotalCost()), "rentit4app@gmail.com");
         	
@@ -52,13 +72,29 @@ public class PurchaseOrderController {
     		invoiceNew.setTotal((float) purchaseOrder.getTotalCost());
     		invoiceNew.persist();
         	
-        	sendMailInvoice(purchaseOrder.getEmail());
+        	sendMailInvoice(purchaseOrder.getEmail(), purchaseOrder.getExternalId());
         	
+>>>>>>> newbranch
         }
         
         return "redirect:/purchaseorders/" + encodeUrlPathSegment(purchaseOrder.getId().toString(), httpServletRequest);
     }
 	
+<<<<<<< HEAD
+	@Autowired
+    private JavaMailSender mailSender;
+	
+	@ServiceActivator
+	public void process(PurchaseOrder purchaseOrder) {
+		
+		SimpleMailMessage mailMessage = new SimpleMailMessage();
+
+		mailMessage.setTo(purchaseOrder.getEmail());
+		mailMessage.setSentDate(new Date());
+		mailMessage.setSubject("Here is an invoice for returned plant");
+		mailMessage.setText("You may start paying. Assosiated PO: " + purchaseOrder.getExternalID());
+		mailSender.send(mailMessage);
+=======
 	private JavaMailSender mailSender;
 	private SimpleMailMessage simpleMailMessage;
  
@@ -91,7 +127,7 @@ public class PurchaseOrderController {
 	     mailSender.send(message);
          }
 	
-	public void sendMailInvoice(String to){
+	public void sendMailInvoice(String to, String po){
 		ApplicationContext context = 
 	             new ClassPathXmlApplicationContext("META-INF/spring/Spring-Mail.xml");
 	 
@@ -99,5 +135,6 @@ public class PurchaseOrderController {
 	        mm.sendMail(to);
 	 
 	    
+>>>>>>> newbranch
 	}
 }

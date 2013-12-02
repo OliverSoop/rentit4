@@ -1,5 +1,10 @@
+<<<<<<< HEAD
+#Updated at Mon Dec 02 22:00:53 EET 2013
+#Mon Dec 02 22:00:53 EET 2013
+=======
 #Updated at Mon Dec 02 23:57:22 EET 2013
 #Mon Dec 02 23:57:22 EET 2013
+>>>>>>> newbranch
 application_name=RentIT
 label_ee_ut_model_invoice=Invoice
 label_ee_ut_model_invoice_id=Id
