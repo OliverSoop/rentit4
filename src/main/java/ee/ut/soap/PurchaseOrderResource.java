@@ -23,4 +23,5 @@ public class PurchaseOrderResource {
 	private Date poRecievedDate;
 	private POstatus status;
 	private Date returnDate;
+	private String email;
 }

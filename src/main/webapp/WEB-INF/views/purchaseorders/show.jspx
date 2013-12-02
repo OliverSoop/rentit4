@@ -13,5 +13,6 @@
         <field:display date="true" dateTimePattern="${purchaseOrder_enddate_date_format}" field="endDate" id="s_ee_ut_model_PurchaseOrder_endDate" object="${purchaseorder}" z="tYkJ0wXUWyHJdntmfBlUh8JXCz0="/>
         <field:display field="constructionSite" id="s_ee_ut_model_PurchaseOrder_constructionSite" object="${purchaseorder}" z="x3wwbSEPeuSsGp+tNEpbLKFip/E="/>
         <field:display field="totalCost" id="s_ee_ut_model_PurchaseOrder_totalCost" object="${purchaseorder}" z="wlWO4hhuwuUy++J/YdCpUVdXdcE="/>
+        <field:display field="email" id="s_ee_ut_model_PurchaseOrder_email" object="${purchaseorder}" z="lkOFF0efa730twcKn6EC4VXqhMQ="/>
     </page:show>
 </div>

@@ -90,4 +90,12 @@ privileged aspect PurchaseOrder_Roo_JavaBean {
         this.ReturnDate = ReturnDate;
     }
     
+    public String PurchaseOrder.getEmail() {
+        return this.email;
+    }
+    
+    public void PurchaseOrder.setEmail(String email) {
+        this.email = email;
+    }
+    
 }

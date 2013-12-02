@@ -66,7 +66,11 @@ public class PurchaseOrder {
     @DateTimeFormat(style = "M-")
     private Date ReturnDate;
 
-	public String getExternalID() {
+    public String getExternalID() {
         return this.externalId;
     }
+
+    /**
+     */
+    private String email;
 }

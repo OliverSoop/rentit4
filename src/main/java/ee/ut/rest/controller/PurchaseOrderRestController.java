@@ -60,6 +60,7 @@ public class PurchaseOrderRestController {
 			po.setPORecievedDate(new Date());
 			po.setStatus(POstatus.PENDING_CONFIRMATION);
 			po.setReturnDate(por.getReturnDate());
+			po.setEmail(por.getEmail());
 			po.persist();
 			
 			PurchaseOrderResourceAssembler assembler = new PurchaseOrderResourceAssembler();
@@ -109,6 +110,7 @@ public class PurchaseOrderRestController {
 			po.setPORecievedDate(por.getPOrecievedDate());
 			po.setStatus(POstatus.PENDING_UPDATE);
 			po.setReturnDate(por.getReturnDate());
+			po.setEmail(por.getEmail());
 			po.persist();
 
 			response = new ResponseEntity<>(HttpStatus.OK);

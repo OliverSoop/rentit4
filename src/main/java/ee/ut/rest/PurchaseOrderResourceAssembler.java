@@ -27,6 +27,7 @@ public class PurchaseOrderResourceAssembler extends
 		por.setStatus(po.getStatus());
 		por.setSiteEngineer(po.getSiteEngineer());
 		por.setTotalCost(po.getTotalCost());
+		por.setEmail(po.getEmail());
 		return por;
 	}
 }

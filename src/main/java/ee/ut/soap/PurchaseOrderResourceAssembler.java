@@ -14,6 +14,7 @@ public class PurchaseOrderResourceAssembler {
 		por.setPoRecievedDate(po.getPORecievedDate());
 		por.setPlantId(po.getPlantID().getId());
 		por.setStatus(po.getStatus());
+		por.setEmail(po.getEmail());
 		return por;
 	}
 }

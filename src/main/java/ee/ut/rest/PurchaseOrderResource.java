@@ -23,6 +23,7 @@ public class PurchaseOrderResource extends ResourceSupport {
     private Date POrecievedDate;
     private POstatus status;
     private Date returnDate;
+    private String email;
       
 
 	public String getExternalID() {
@@ -105,5 +106,13 @@ public class PurchaseOrderResource extends ResourceSupport {
 
 	public void setReturnDate(Date returnDate) {
         this.returnDate = returnDate;
+    }
+	
+	public String getEmail() {
+        return this.email;
+    }
+
+	public void setEmail(String email) {
+        this.email = email;
     }
 }

@@ -13,6 +13,7 @@
         <field:datetime dateTimePattern="${purchaseOrder_enddate_date_format}" field="endDate" id="c_ee_ut_model_PurchaseOrder_endDate" z="WtPl3XZnDfLqJ4nqDUABijL8ZMg="/>
         <field:input field="constructionSite" id="c_ee_ut_model_PurchaseOrder_constructionSite" z="gz3M/dxPfCPbkzuUd+CpHE+CReE="/>
         <field:input field="totalCost" id="c_ee_ut_model_PurchaseOrder_totalCost" z="foxGmJBXQuXUWZ9TGrnZzC7gSnI="/>
+        <field:input field="email" id="c_ee_ut_model_PurchaseOrder_email" validationMessageCode="field_invalid_email" z="1+gTbg4bL2z3DeHCdMNzXuqL9u8="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_ee_ut_model_PurchaseOrder" render="${not empty dependencies}" z="e92cPDHZqclsb7jq0SMbQPnO5Z8="/>
 </div>
