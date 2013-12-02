@@ -72,17 +72,6 @@ privileged aspect PurchaseOrderController_Roo_Controller {
         return "purchaseorders/list";
     }
     
-    @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
-    public String PurchaseOrderController.update(@Valid PurchaseOrder purchaseOrder, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, purchaseOrder);
-            return "purchaseorders/update";
-        }
-        uiModel.asMap().clear();
-        purchaseOrderRepository.save(purchaseOrder);
-        return "redirect:/purchaseorders/" + encodeUrlPathSegment(purchaseOrder.getId().toString(), httpServletRequest);
-    }
-    
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String PurchaseOrderController.updateForm(@PathVariable("id") Long id, Model uiModel) {
         populateEditForm(uiModel, purchaseOrderRepository.findOne(id));

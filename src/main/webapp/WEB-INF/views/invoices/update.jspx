@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_ee_ut_model_Invoice" modelAttribute="invoice" path="/invoices" versionField="Version" z="ThTwooh17B8u2WnMleH50BHZphQ=">
+        <field:input field="total" id="c_ee_ut_model_Invoice_total" validationMessageCode="field_invalid_number" z="FK6z2V2bBkezx1s9SG/Ae6lzkgI="/>
+        <field:input field="purchaseOrderHRef" id="c_ee_ut_model_Invoice_purchaseOrderHRef" z="m+UQroE/5IXX8jqur8dNKhiHIF8="/>
+        <field:input field="returnEmail" id="c_ee_ut_model_Invoice_returnEmail" z="9UbHL3e0Xs67LSMUtnfGXrYCtOY="/>
+        <field:select field="status" id="c_ee_ut_model_Invoice_status" items="${invoicestatuses}" path="invoicestatuses" z="2Y6U0de+04T9d4ioZFKVbeZvIkw="/>
+    </form:update>
+</div>
