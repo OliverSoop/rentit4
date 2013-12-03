@@ -20,7 +20,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
-import WriteXMLFile.WriteXMLFile;
+import ee.ut.util.WriteXMLFile;
 import ee.ut.domain.InvoiceStatus;
 import ee.ut.domain.POstatus;
 import ee.ut.model.Invoice;
@@ -43,14 +43,15 @@ public class PurchaseOrderController {
         
         if(purchaseOrder.getStatus() == POstatus.RETURNED){
         	
-        	WriteXMLFile.write(purchaseOrder.getExternalId(), ""+((int)purchaseOrder.getTotalCost()), "rentit4app@gmail.com");
-        	
         	Invoice invoiceNew = new Invoice();
     		invoiceNew.setPurchaseOrderHRef(purchaseOrder.getId().toString());
     		invoiceNew.setReturnEmail(purchaseOrder.getEmail());
     		invoiceNew.setStatus(InvoiceStatus.UNPAID);
     		invoiceNew.setTotal((float) purchaseOrder.getTotalCost());
     		invoiceNew.persist();
+    		
+    		WriteXMLFile.write(purchaseOrder.getExternalId(), ""+((int)purchaseOrder.getTotalCost()), "rentit4app@gmail.com", ""+invoiceNew.getId());
+        	
         	
         	sendMailInvoice(purchaseOrder.getEmail());
         	

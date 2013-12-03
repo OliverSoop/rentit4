@@ -1,4 +1,4 @@
-package WriteXMLFile;
+package ee.ut.util;
 
 import java.io.File;
 import javax.xml.parsers.DocumentBuilder;
@@ -16,7 +16,7 @@ import org.w3c.dom.Element;
  
 public class WriteXMLFile {
  
-	public static void write(String purchaseOrderHRefValue, String totalValue, String returnEmailValue) {
+	public static void write(String purchaseOrderHRefValue, String totalValue, String returnEmailValue, String idValue) {
  
 	  try {
  
@@ -38,10 +38,15 @@ public class WriteXMLFile {
 		purchaseOrderHRef.appendChild(doc.createTextNode(purchaseOrderHRefValue));
 		rootElement.appendChild(purchaseOrderHRef);
  
-		// lastname elements
+		// returnEmail elements
 		Element returnEmail = doc.createElement("returnEmail");
 		returnEmail.appendChild(doc.createTextNode(returnEmailValue));
 		rootElement.appendChild(returnEmail);
+		
+		// id elements
+		Element id = doc.createElement("externalId");
+		id.appendChild(doc.createTextNode(idValue));
+		rootElement.appendChild(id);
  
 		// write the content into xml file
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
