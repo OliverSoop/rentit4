@@ -22,6 +22,7 @@ public class PlantControllerTest {
 	
 	private static String DOMAIN_URL = "http://rentit4.herokuapp.com/";
 	
+	
     @Test
     public void testGetPlantPrice() {
     	ClientResponse response = createPlantResource();
