@@ -6,6 +6,7 @@ package ee.ut.web;
 import ee.ut.model.Invoice;
 import ee.ut.model.Plant;
 import ee.ut.model.PurchaseOrder;
+import ee.ut.repository.InvoiceRepository;
 import ee.ut.repository.PlantRepository;
 import ee.ut.repository.PurchaseOrderRepository;
 import ee.ut.security.Assignments;
@@ -22,6 +23,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     declare @type: ApplicationConversionServiceFactoryBean: @Configurable;
     
     @Autowired
+    InvoiceRepository ApplicationConversionServiceFactoryBean.invoiceRepository;
+    
+    @Autowired
     PlantRepository ApplicationConversionServiceFactoryBean.plantRepository;
     
     @Autowired
@@ -30,7 +34,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Invoice, String> ApplicationConversionServiceFactoryBean.getInvoiceToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<ee.ut.model.Invoice, java.lang.String>() {
             public String convert(Invoice invoice) {
-                return new StringBuilder().append(invoice.getTotal()).append(' ').append(invoice.getPurchaseOrderHRef()).append(' ').append(invoice.getReturnEmail()).toString();
+                return new StringBuilder().append(invoice.getTotal()).append(' ').append(invoice.getPurchaseOrderHRef()).append(' ').append(invoice.getReturnEmail()).append(' ').append(invoice.getDeadline()).toString();
             }
         };
     }
@@ -38,7 +42,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Long, Invoice> ApplicationConversionServiceFactoryBean.getIdToInvoiceConverter() {
         return new org.springframework.core.convert.converter.Converter<java.lang.Long, ee.ut.model.Invoice>() {
             public ee.ut.model.Invoice convert(java.lang.Long id) {
-                return Invoice.findInvoice(id);
+                return invoiceRepository.findOne(id);
             }
         };
     }

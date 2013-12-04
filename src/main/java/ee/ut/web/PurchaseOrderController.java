@@ -1,30 +1,31 @@
 package ee.ut.web;
 
+import java.util.Calendar;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.mail.MailParseException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.mail.MailParseException;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 
-import ee.ut.util.WriteXMLFile;
 import ee.ut.domain.InvoiceStatus;
 import ee.ut.domain.POstatus;
 import ee.ut.model.Invoice;
 import ee.ut.model.PurchaseOrder;
+import ee.ut.util.WriteXMLFile;
 
 @RequestMapping("/purchaseorders")
 @Controller
@@ -48,9 +49,12 @@ public class PurchaseOrderController {
     		invoiceNew.setReturnEmail(purchaseOrder.getEmail());
     		invoiceNew.setStatus(InvoiceStatus.UNPAID);
     		invoiceNew.setTotal((float) purchaseOrder.getTotalCost());
+    		Calendar cal = Calendar.getInstance();
+    		cal.add(Calendar.DAY_OF_MONTH, 7);
+    		invoiceNew.setDeadline(cal.getTime());
     		invoiceNew.persist();
     		
-    		WriteXMLFile.write(purchaseOrder.getExternalId(), ""+((int)purchaseOrder.getTotalCost()), "rentit4app@gmail.com", ""+invoiceNew.getId());
+    		WriteXMLFile.write(purchaseOrder.getExternalId(), ""+((int)purchaseOrder.getTotalCost()), "rentit4app@gmail.com", ""+invoiceNew.getId(), invoiceNew.getDeadline());
         	
         	
         	sendMailInvoice(purchaseOrder.getEmail());

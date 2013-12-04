@@ -1,6 +1,12 @@
 package ee.ut.util;
 
 import java.io.File;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -9,14 +15,13 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
- 
-import org.w3c.dom.Attr;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
  
 public class WriteXMLFile {
  
-	public static void write(String purchaseOrderHRefValue, String totalValue, String returnEmailValue, String idValue) {
+	public static void write(String purchaseOrderHRefValue, String totalValue, String returnEmailValue, String idValue, Date deadline) {
  
 	  try {
  
@@ -37,6 +42,16 @@ public class WriteXMLFile {
 		Element purchaseOrderHRef = doc.createElement("purchaseOrderHRef");
 		purchaseOrderHRef.appendChild(doc.createTextNode(purchaseOrderHRefValue));
 		rootElement.appendChild(purchaseOrderHRef);
+		
+		//Deadline element
+		GregorianCalendar c = new GregorianCalendar();
+		c.setTime(deadline);
+		try {
+			XMLGregorianCalendar date2 = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+			Element deadlineEl = doc.createElement("deadline");
+			deadlineEl.appendChild(doc.createTextNode(date2.toXMLFormat()));
+		} catch (DatatypeConfigurationException e) {
+		}
  
 		// returnEmail elements
 		Element returnEmail = doc.createElement("returnEmail");

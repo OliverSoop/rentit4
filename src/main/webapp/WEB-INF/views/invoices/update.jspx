@@ -7,5 +7,6 @@
         <field:input field="purchaseOrderHRef" id="c_ee_ut_model_Invoice_purchaseOrderHRef" z="m+UQroE/5IXX8jqur8dNKhiHIF8="/>
         <field:input field="returnEmail" id="c_ee_ut_model_Invoice_returnEmail" z="9UbHL3e0Xs67LSMUtnfGXrYCtOY="/>
         <field:select field="status" id="c_ee_ut_model_Invoice_status" items="${invoicestatuses}" path="invoicestatuses" z="2Y6U0de+04T9d4ioZFKVbeZvIkw="/>
+        <field:datetime dateTimePattern="${invoice_deadline_date_format}" field="deadline" id="c_ee_ut_model_Invoice_deadline" z="+zR8Wy01SOBeDwN6i3cPLPMfAoU="/>
     </form:update>
 </div>

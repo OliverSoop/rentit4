@@ -7,5 +7,6 @@
         <field:display field="purchaseOrderHRef" id="s_ee_ut_model_Invoice_purchaseOrderHRef" object="${invoice}" z="W9L+EAs9XSppb3fzQCZw6r9flxI="/>
         <field:display field="returnEmail" id="s_ee_ut_model_Invoice_returnEmail" object="${invoice}" z="iSbYKc67jcCV5g4b4YGTm8OEND0="/>
         <field:display field="status" id="s_ee_ut_model_Invoice_status" object="${invoice}" z="hyCerxifTHXbIWBNJJD6NvtgAEg="/>
+        <field:display date="true" dateTimePattern="${invoice_deadline_date_format}" field="deadline" id="s_ee_ut_model_Invoice_deadline" object="${invoice}" z="xl6qb+VdZTl/PmE9iE3gBtUfeIo="/>
     </page:show>
 </div>

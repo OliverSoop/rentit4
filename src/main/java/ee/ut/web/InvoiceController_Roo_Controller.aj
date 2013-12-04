@@ -5,11 +5,15 @@ package ee.ut.web;
 
 import ee.ut.domain.InvoiceStatus;
 import ee.ut.model.Invoice;
+import ee.ut.repository.InvoiceRepository;
 import ee.ut.web.InvoiceController;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import org.joda.time.format.DateTimeFormat;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +25,9 @@ import org.springframework.web.util.WebUtils;
 
 privileged aspect InvoiceController_Roo_Controller {
     
+    @Autowired
+    InvoiceRepository InvoiceController.invoiceRepository;
+    
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String InvoiceController.create(@Valid Invoice invoice, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
@@ -28,7 +35,7 @@ privileged aspect InvoiceController_Roo_Controller {
             return "invoices/create";
         }
         uiModel.asMap().clear();
-        invoice.persist();
+        invoiceRepository.save(invoice);
         return "redirect:/invoices/" + encodeUrlPathSegment(invoice.getId().toString(), httpServletRequest);
     }
     
@@ -40,7 +47,8 @@ privileged aspect InvoiceController_Roo_Controller {
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String InvoiceController.show(@PathVariable("id") Long id, Model uiModel) {
-        uiModel.addAttribute("invoice", Invoice.findInvoice(id));
+        addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("invoice", invoiceRepository.findOne(id));
         uiModel.addAttribute("itemId", id);
         return "invoices/show";
     }
@@ -50,12 +58,13 @@ privileged aspect InvoiceController_Roo_Controller {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("invoices", Invoice.findInvoiceEntries(firstResult, sizeNo));
-            float nrOfPages = (float) Invoice.countInvoices() / sizeNo;
+            uiModel.addAttribute("invoices", invoiceRepository.findAll(new org.springframework.data.domain.PageRequest(firstResult / sizeNo, sizeNo)).getContent());
+            float nrOfPages = (float) invoiceRepository.count() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-            uiModel.addAttribute("invoices", Invoice.findAllInvoices());
+            uiModel.addAttribute("invoices", invoiceRepository.findAll());
         }
+        addDateTimeFormatPatterns(uiModel);
         return "invoices/list";
     }
     
@@ -66,28 +75,33 @@ privileged aspect InvoiceController_Roo_Controller {
             return "invoices/update";
         }
         uiModel.asMap().clear();
-        invoice.merge();
+        invoiceRepository.save(invoice);
         return "redirect:/invoices/" + encodeUrlPathSegment(invoice.getId().toString(), httpServletRequest);
     }
     
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String InvoiceController.updateForm(@PathVariable("id") Long id, Model uiModel) {
-        populateEditForm(uiModel, Invoice.findInvoice(id));
+        populateEditForm(uiModel, invoiceRepository.findOne(id));
         return "invoices/update";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = "text/html")
     public String InvoiceController.delete(@PathVariable("id") Long id, @RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        Invoice invoice = Invoice.findInvoice(id);
-        invoice.remove();
+        Invoice invoice = invoiceRepository.findOne(id);
+        invoiceRepository.delete(invoice);
         uiModel.asMap().clear();
         uiModel.addAttribute("page", (page == null) ? "1" : page.toString());
         uiModel.addAttribute("size", (size == null) ? "10" : size.toString());
         return "redirect:/invoices";
     }
     
+    void InvoiceController.addDateTimeFormatPatterns(Model uiModel) {
+        uiModel.addAttribute("invoice_deadline_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
+    }
+    
     void InvoiceController.populateEditForm(Model uiModel, Invoice invoice) {
         uiModel.addAttribute("invoice", invoice);
+        addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("invoicestatuses", Arrays.asList(InvoiceStatus.values()));
     }
     

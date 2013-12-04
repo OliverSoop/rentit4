@@ -8,6 +8,7 @@
             <table:column id="c_ee_ut_model_Invoice_purchaseOrderHRef" property="purchaseOrderHRef" z="1QaLa8+SFrSBeDZ9DF4NeibfepA="/>
             <table:column id="c_ee_ut_model_Invoice_returnEmail" property="returnEmail" z="bVDMPOyWejQUgbMp3UxVr4xPV/E="/>
             <table:column id="c_ee_ut_model_Invoice_status" property="status" z="mCkruqlLwOtltSecCLtGy8IHZLs="/>
+            <table:column date="true" dateTimePattern="${invoice_deadline_date_format}" id="c_ee_ut_model_Invoice_deadline" property="deadline" z="F3NBlOtNBkJwZPSdMP2sp4XWD64="/>
         </table:table>
     </page:list>
 </div>
