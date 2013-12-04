@@ -84,7 +84,7 @@ public class PurchaseOrderController {
 		helper.setText("invoice");
  
 		FileSystemResource file = new FileSystemResource("invoice.xml");
-		helper.addAttachment(file.getFilename(), file);
+		helper.addAttachment(file.getFilename(), file, "text/xml");
  
 	     }catch (MessagingException e) {
 		throw new MailParseException(e);
