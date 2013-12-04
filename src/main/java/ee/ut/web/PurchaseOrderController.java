@@ -75,8 +75,6 @@ public class PurchaseOrderController {
 	}
  
 	public void sendMail(String to) {
-		System.out.println("saadan");
- 
 	   MimeMessage message = mailSender.createMimeMessage();
  
 	   try{
