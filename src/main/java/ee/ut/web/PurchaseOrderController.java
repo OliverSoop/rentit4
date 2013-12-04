@@ -43,7 +43,6 @@ public class PurchaseOrderController {
         purchaseOrderRepository.save(purchaseOrder);
         
         if(purchaseOrder.getStatus() == POstatus.RETURNED){
-        	
         	Invoice invoiceNew = new Invoice();
     		invoiceNew.setPurchaseOrderHRef(purchaseOrder.getId().toString());
     		invoiceNew.setReturnEmail(purchaseOrder.getEmail());
@@ -76,6 +75,7 @@ public class PurchaseOrderController {
 	}
  
 	public void sendMail(String to) {
+		System.out.println("saadan");
  
 	   MimeMessage message = mailSender.createMimeMessage();
  

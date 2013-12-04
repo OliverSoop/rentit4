@@ -50,7 +50,9 @@ public class WriteXMLFile {
 			XMLGregorianCalendar date2 = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
 			Element deadlineEl = doc.createElement("deadline");
 			deadlineEl.appendChild(doc.createTextNode(date2.toXMLFormat()));
+			rootElement.appendChild(deadlineEl);
 		} catch (DatatypeConfigurationException e) {
+			System.out.println("Probleem");
 		}
  
 		// returnEmail elements
