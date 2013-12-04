@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import ee.ut.domain.ConstructionSiteNotSetException;
+import ee.ut.domain.EmailNotSetException;
 import ee.ut.domain.InvalidHirePeriodException;
 import ee.ut.domain.POstatus;
 import ee.ut.model.Plant;
@@ -31,7 +32,7 @@ import ee.ut.util.ExtendedLink;
 public class PurchaseOrderRestController {
 
 	@RequestMapping(method = RequestMethod.POST, value = "")
-	public ResponseEntity<PurchaseOrderResource> createPO(@RequestBody PurchaseOrderResource por) throws InvalidHirePeriodException, ConstructionSiteNotSetException {
+	public ResponseEntity<PurchaseOrderResource> createPO(@RequestBody PurchaseOrderResource por) throws InvalidHirePeriodException, ConstructionSiteNotSetException, EmailNotSetException {
 
 		PurchaseOrder po = new PurchaseOrder();
 		Plant plant = Plant.findPlant(por.getPlantID());
@@ -47,6 +48,8 @@ public class PurchaseOrderRestController {
 				throw new InvalidHirePeriodException("The start date or end date for the plant hire period is not set");
 			} else if (por.getConstructionSite() == null || por.getConstructionSite().length() == 0) {
 				throw new ConstructionSiteNotSetException("Construction site not set");
+			} else if (por.getEmail() == null || por.getEmail().length() == 0) {
+				throw new EmailNotSetException("Email not set");
 			}
 			
 			po.setExternalId(por.getExternalID());
@@ -265,7 +268,7 @@ public class PurchaseOrderRestController {
 	}
 	
 	//Error handling
-	@ExceptionHandler({InvalidHirePeriodException.class, ConstructionSiteNotSetException.class})
+	@ExceptionHandler({InvalidHirePeriodException.class, ConstructionSiteNotSetException.class, EmailNotSetException.class})
 	public ResponseEntity<String> handleBadRequest(Exception ex) {
 		return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
 	}

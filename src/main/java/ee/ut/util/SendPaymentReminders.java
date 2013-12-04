@@ -35,6 +35,9 @@ public class SendPaymentReminders extends TimerTask {
 	
 	public void sendMail(Invoice invoice) {
 		PurchaseOrder po = PurchaseOrder.findPurchaseOrder(Long.parseLong(invoice.getPurchaseOrderHRef()));
+		if (po == null || invoice.getTotal() < 10.0) {
+			return;
+		}
 		MimeMessage message = mailSender.createMimeMessage();
 
 		try{
@@ -50,7 +53,7 @@ public class SendPaymentReminders extends TimerTask {
 						 + "Best regards,\n"
 						 + "RentIt");
 
-		}catch (MessagingException e) {
+		} catch (MessagingException e) {
 			throw new MailParseException(e);
 		}
 		mailSender.send(message);
